@@ -1,0 +1,34 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="TGUnitModelTemplate.lua"/>
+	
+	<!-- This frame is the generic combat icon -->
+	<Frame name="TGUnitModelTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="200" y="200"/>
+		</Size>
+		<Frames>
+			<PlayerModel name="$parentModel" setAllPoints="true"/>
+		</Frames>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name = "$parentBackground" setAllPoints="true">
+					<Color r="0" g="0" b="0" a="0.5"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnUpdate>
+				TGUnitModelTemplate_OnUpdate(self);
+			</OnUpdate>
+			<OnShow>
+				TGUnitModelTemplate_OnShow(self);
+			</OnShow>
+			<OnHide>
+				TGUnitModelTemplate_OnHide(self);
+			</OnHide>
+			<OnAnimFinished>
+				TGUnitModelTemplate_OnAnimFinished(self);
+			</OnAnimFinished>
+		</Scripts>
+	</Frame>
+</Ui>

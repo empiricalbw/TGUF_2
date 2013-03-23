@@ -1,0 +1,25 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="TGUnitFrames.lua"/>
+	<Script file="TGUnit.lua"/>
+	<Script file="TGUnitUpdate.lua"/>
+	<Script file="TGUnitFramesObjectManager.lua"/>
+	<Script file="TGUnitFramesTemplateManager.lua"/>
+	<Script file="TGUnitFramesLayoutManager.lua"/>
+	<Script file="TGBlizzardFrames.lua"/>
+	<Script file="AutoTarget.lua"/>
+	
+	<!-- Frame to handle all core events -->
+	<Frame name="TGUnitFramesUI">
+		<Scripts>
+			<OnLoad>
+				TGUnitFrames_OnLoad(self);
+			</OnLoad>
+			<OnEvent>
+				TGUnitFrames_OnEvent(self,event,...);
+			</OnEvent>
+			<OnUpdate>
+				TGUnitFrames_OnUpdate(self,arg1);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

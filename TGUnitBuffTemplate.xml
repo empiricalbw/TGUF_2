@@ -1,0 +1,34 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="TGUnitBuffTemplate.lua"/>
+	
+	<!-- This frame is the generic text element -->
+	<Frame name="TGUnitBuffTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="16" y="16"/>
+		</Size>
+		<Frames>
+			<Cooldown name="$parentCooldown" setAllPoints="true" hidden="true" reverse="true" drawEdge="true"/>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentCount" setAllPoints="true" justifyH="RIGHT" justifyV="BOTTOM" inherits="NumberFontNormalSmall"/>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				TGUnitBuffTemplate_OnEnter(self);
+			</OnEnter>
+			<OnLeave>
+				TGUnitBuffTemplate_OnLeave(self);
+			</OnLeave>
+		</Scripts>
+	</Frame>
+</Ui>

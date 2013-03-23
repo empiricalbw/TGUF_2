@@ -1,0 +1,36 @@
+## Interface: 50200
+## Title: TGUnitFrames 1.0a1
+## DefaultState: enabled
+## Notes: BC-compatible unit frames!
+## Version 1.0a1
+## Author: Holytoledo
+## URL: 
+## SavedVariables: TGUF_TEMPLATES_USER_TEMPLATES, TGUF_USER_COLLECTIONS, TGMD_MODELS
+TGUnitModelDB.xml
+TGUnitFrames.xml
+TGUnitFramesRaidHider.lua
+TGUnitFrameTemplate.xml
+TGUnitHealthBarTemplate.xml
+TGUnitManaBarTemplate.xml
+TGUnitCastBarTemplate.xml
+TGUnitThreatBarTemplate.xml
+TGUnitCastIconTemplate.xml
+TGUnitCombatIconTemplate.xml
+TGUnitLeaderIconTemplate.xml
+TGUnitLootMasterIconTemplate.xml
+TGUnitRaidTargetIconTemplate.xml
+TGUnitTextTemplate.xml
+TGUnitBuffTemplate.xml
+TGUnitProcTemplate.xml
+TGUnitModelTemplate.xml
+TGUnitTextureTemplate.xml
+TGUnitClassificationTextureTemplate.xml
+TGUnitClassificationBorderTemplate.xml
+TGUnitComboTextureTemplate.xml
+TGUnitStatusBorderTemplate.xml
+TGUnitDebugTemplate.xml
+TGUnitFramesTemplateManager.xml
+TGUnitFramesLayoutManager.xml
+TGUnitFramesDebugging.lua
+TGUnitCastTracker.xml
+TGRaidSorter.lua

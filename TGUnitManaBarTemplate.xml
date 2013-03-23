@@ -1,0 +1,21 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="TGUnitManaBarTemplate.lua"/>
+	
+	<!-- This frame is the generic mana bar -->
+	<StatusBar name="TGUnitManaBarTemplate" drawLayer="BORDER" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="150" y="10"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture setAllPoints="true">
+					<Color r="0" g="0" b="0" a="0.5"/>
+				</Texture>		
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentBorder"/>
+			</Layer>
+		</Layers>
+		<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+	</StatusBar>
+</Ui>

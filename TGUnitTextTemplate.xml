@@ -1,0 +1,27 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="TGUnitTextTemplate.lua"/>
+	
+	<!-- This frame is the generic text element -->
+	<Frame name="TGUnitTextTemplate" hidden="true" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString name="$parentText" inherits="GameFontWhite" justifyH="LEFT" justifyV="CENTER">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnUpdate>
+				if self.poll then
+					if (GetTime() - self.lastPoll >= 0.1) then
+						TGUnitText_UnitUpdate(self.listener.unit,self);
+						self.lastPoll = GetTime();
+					end
+				end
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

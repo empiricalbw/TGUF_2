@@ -1,0 +1,132 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="TGUnitModelDB.lua"/>
+	
+	<!-- This frame is the generic combat icon -->
+	<Frame name="TGUnitModelDBFrame" parent="UIParent" hidden="true">
+		<Size>
+			<AbsDimension x="600" y="600"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Frames>
+			<Button name="$parentRotateLeft">
+				<Size>
+					<AbsDimension x="35" y="35"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonDown", "LeftButtonUp");
+					</OnLoad>
+					<OnClick>
+						TGUnitModelDB_RotateLeft();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
+				<HighlightTexture file="Interface\Buttons\ButtonHilight-Round" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parentRotateRight">
+				<Size>
+					<AbsDimension x="35" y="35"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentRotateLeft" relativePoint="TOPRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonDown", "LeftButtonUp");
+					</OnLoad>
+					<OnClick>
+						TGUnitModelDB_RotateRight();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-RotationRight-Button-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-RotationRight-Button-Down"/>
+				<HighlightTexture file="Interface\Buttons\ButtonHilight-Round" alphaMode="ADD"/>
+			</Button>
+			<Frame name="$parentModelBG">
+				<Size>
+					<AbsDimension x="400" y="400"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="20" y="-35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+					<PlayerModel name="$parentModel" setAllPoints="true"/>
+				</Frames>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name = "$parentBackground" setAllPoints="true">
+							<Color r="0" g="0" b="0" a="0.5"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="$parentModelInfo">
+				<Size>
+					<AbsDimension x="560" y="140"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentModelBG" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentText" inherits="GameFontWhite" justifyH="LEFT" justifyV="CENTER">
+							<Size>
+								<AbsDimension x="560" y="12"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="10" y="-10"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBackground" setAllPoints="true">
+							<Color r="0" g="0" b="0" a="0.5"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name = "$parentBackground" setAllPoints="true">
+					<Color r="0" g="0" b="0" a="0.5"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				table.insert(UISpecialFrames,self:GetName());
+			</OnLoad>
+			<OnUpdate>
+				TGUnitModelDB_OnUpdate(elapsed,self);
+			</OnUpdate>
+			<OnShow>
+				TGUnitModelDB_OnShow(self);
+			</OnShow>
+			<OnHide>
+				TGUnitModelDB_OnHide(self);
+			</OnHide>
+			<OnAnimFinished>
+				TGUnitModelDB_OnAnimFinished(self);
+			</OnAnimFinished>
+		</Scripts>
+	</Frame>
+</Ui>
