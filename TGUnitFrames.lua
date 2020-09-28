@@ -7,21 +7,21 @@ local TGUF_EVENT_DISPATCH_TABLE = {
     ["PLAYER_ENTERING_WORLD"] = "onPlayerEnteringWorld",
     ["CVAR_UPDATE"] = "onCVARUpdate",
     ["UNIT_MANA"] = "onUnitPowerChange",
-    ["UNIT_RAGE"] = "onUnitPowerChange",
-    ["UNIT_FOCUS"] = "onUnitPowerChange",
-    ["UNIT_ENERGY"] = "onUnitPowerChange",
+    --["UNIT_RAGE"] = "onUnitPowerChange",
+    --["UNIT_FOCUS"] = "onUnitPowerChange",
+    --["UNIT_ENERGY"] = "onUnitPowerChange",
     ["UNIT_HAPPINESS"] = "onUnitPowerChange",
-    ["UNIT_MAXMANA"] = "onUnitMaxPowerChange",
-    ["UNIT_MAXRAGE"] = "onUnitMaxPowerChange",
-    ["UNIT_MAXFOCUS"] = "onUnitMaxPowerChange",
-    ["UNIT_MAXENERGY"] = "onUnitMaxPowerChange",
-    ["UNIT_MAXHAPPINESS"] = "onUnitMaxPowerChange",
+    --["UNIT_MAXMANA"] = "onUnitMaxPowerChange",
+    --["UNIT_MAXRAGE"] = "onUnitMaxPowerChange",
+    --["UNIT_MAXFOCUS"] = "onUnitMaxPowerChange",
+    --["UNIT_MAXENERGY"] = "onUnitMaxPowerChange",
+    --["UNIT_MAXHAPPINESS"] = "onUnitMaxPowerChange",
     ["UNIT_DISPLAYPOWER"] = "onUnitPowerTypeChange",
     ["UNIT_HEALTH"] = "onUnitHealthChange",
     ["UNIT_MAXHEALTH"] = "onUnitMaxHealthChange",
     ["UNIT_LEVEL"] = "onUnitLevelChange",
     ["PLAYER_TARGET_CHANGED"] = "onPlayerTargetChange",
-    ["PLAYER_FOCUS_CHANGED"] = "onPlayerFocusChange",
+    --["PLAYER_FOCUS_CHANGED"] = "onPlayerFocusChange",
     ["UNIT_SPELLCAST_START"] = "onSpellcastStart",
     ["UNIT_SPELLCAST_DELAYED"] = "onSpellcastDelayed",
     ["UNIT_SPELLCAST_STOP"] = "onSpellcastStop",
@@ -30,7 +30,7 @@ local TGUF_EVENT_DISPATCH_TABLE = {
     ["UNIT_SPELLCAST_CHANNEL_START"] = "onSpellcastChannelStart",
     ["UNIT_SPELLCAST_CHANNEL_UPDATE"] = "onSpellcastChannelUpdate",
     ["UNIT_SPELLCAST_CHANNEL_STOP"] = "onSpellcastChannelStop",
-    ["UNIT_SPELLMISS"] = "onSpellcastMiss",
+    --["UNIT_SPELLMISS"] = "onSpellcastMiss",
     ["UNIT_SPELLCAST_SUCCEEDED"] = "onSpellcastSucceeded",
     ["UNIT_SPELLCAST_SENT"] = "onSpellcastSent",
     ["UNIT_PET"] = "onUnitPet",
@@ -41,9 +41,9 @@ local TGUF_EVENT_DISPATCH_TABLE = {
     ["PLAYER_REGEN_DISABLED"] = "onPlayerRegenDisabled",
     ["PLAYER_REGEN_ENABLED"] = "onPlayerRegenEnabled",
     ["UNIT_MODEL_CHANGED"] = "onUnitModelChange",
-    ["PLAYER_COMBO_POINTS"] = "onComboPointsChange",
+    --["PLAYER_COMBO_POINTS"] = "onComboPointsChange",
     ["UNIT_NAME_UPDATE"] = "onUnitNameChange",
-    ["CHAT_MSG_SPELL_SELF_DAMAGE"] = "onChatMsgSpellSelfDamage"
+    --["CHAT_MSG_SPELL_SELF_DAMAGE"] = "onChatMsgSpellSelfDamage"
     };
     
 function TGUnitFrames_RegisterComponent(component)
@@ -204,7 +204,7 @@ function TGUFErrorWithStack(msg)
     _ERRORMESSAGE(errormsg)
 end
 -- Set up error handling
-if true then
+if false then
     seterrorhandler(TGUFErrorWithStack);
 end
 

@@ -165,7 +165,7 @@ function TGUnitModelTemplate_OnUpdate(frame)
 				end
 				modelFrame:SetCamera(frame.cameraIndex);
 			end
-			local	modelPath = modelFrame:GetModel();
+			local	modelPath = nil; --modelFrame:GetModel();
 			if (modelPath ~= nil) then
 				TGMD_MODELS[modelPath] = 1;
 			end

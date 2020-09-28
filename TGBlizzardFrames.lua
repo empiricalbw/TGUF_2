@@ -112,7 +112,9 @@ function TGUF_HideBlizzardFocusFrame()
 		return;
 	end
 	focusFrameHidden = true;
+    --[[
 	FocusFrame:UnregisterAllEvents();
 	FocusFrame:Hide();
+    ]]--
 end
 

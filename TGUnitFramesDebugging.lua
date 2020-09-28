@@ -275,6 +275,7 @@ local	TGUF_DEBUG_FRAME_TEMPLATE =
 	}
 }
 
+--[[
 local TGUF_DEBUG_STUPID_PARTY_LAYOUT =
 {
 	filters =
@@ -317,6 +318,7 @@ local TGUF_DEBUG_STUPID_PARTY_LAYOUT =
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_STUPID_PARTY_LAYOUT,"TGUnitDebugStupidPartyLayout");
+]]
 
 local TGUF_DEBUG_PARTY_LAYOUT =
 {
@@ -358,12 +360,11 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 				}
 			}
 		},
-		--[[
 		{	-- Party1 unit
 			--type = "TGUnitDebug",
 			collection = "DUF",
 			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
+			type = "DUF_PartySmallModelNoCast",
 			unit = "party1",
 			hideInRaid = true,
 			anchors = {
@@ -384,7 +385,7 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 			--type = "TGUnitDebug",
 			collection = "DUF",
 			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
+			type = "DUF_PartySmallModelNoCast",
 			unit = "party2",
 			hideInRaid = true,
 			anchors = {
@@ -405,7 +406,7 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 			--type = "TGUnitDebug",
 			collection = "DUF",
 			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
+			type = "DUF_PartySmallModelNoCast",
 			unit = "party3",
 			hideInRaid = true,
 			anchors = {
@@ -426,7 +427,7 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 			--type = "TGUnitDebug",
 			collection = "DUF",
 			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
+			type = "DUF_PartySmallModelNoCast",
 			unit = "party4",
 			hideInRaid = true,
 			anchors = {
@@ -443,11 +444,11 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 				}
 			}
 		}
-		]]
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_PARTY_LAYOUT,"TGUnitDebugPartyLayout");
 
+--[[
 local TGUF_DEBUG_PARTY_LAYOUT_MODERN =
 {
 	filters =
@@ -574,6 +575,7 @@ local TGUF_DEBUG_PARTY_LAYOUT_MODERN =
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_PARTY_LAYOUT_MODERN,"TGUnitDebugPartyLayoutModern");
+]]
 
 local TGUF_DEBUG_RAID_LAYOUT =
 {
@@ -656,7 +658,7 @@ local TGUF_DEBUG_TARGET_LAYOUT =
 			--type = "TGUnitDebug",
 			collection = "DUF",
 			--type = "DUF_Target",
-			type = "DUF_TargetThreat",
+			type = "DUF_TargetThreadNoCast",
 			unit = "target",
 			hideInRaid = false,
 			anchors = {
@@ -684,6 +686,7 @@ local TGUF_DEBUG_TARGET_LAYOUT =
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_TARGET_LAYOUT,"TGUnitDebugTargetLayout");
 
+--[[
 local TGUF_DEBUG_TARGET_LAYOUT_MODERN =
 {
 	filters =
@@ -719,7 +722,9 @@ local TGUF_DEBUG_TARGET_LAYOUT_MODERN =
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_TARGET_LAYOUT_MODERN,"TGUnitDebugTargetLayoutModern");
+]]
 
+--[[
 local TGUF_DEBUG_FOCUS_LAYOUT =
 {
 	filters =
@@ -758,7 +763,9 @@ local TGUF_DEBUG_FOCUS_LAYOUT =
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_FOCUS_LAYOUT,"TGUnitDebugFocusLayout");
+]]
 
+--[[
 local TGUF_DEBUG_FOCUS_LAYOUT_MODERN =
 {
 	filters =
@@ -794,6 +801,7 @@ local TGUF_DEBUG_FOCUS_LAYOUT_MODERN =
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_FOCUS_LAYOUT_MODERN,"TGUnitDebugFocusLayoutModern");
+]]
 
 function TGUnitDebug_AllocateFocusFrames()
 	TGUF_DEBUG_FRAME_TEMPLATE.highlightIfTargetted = true;
@@ -809,6 +817,7 @@ function TGUnitDebug_AllocateTargetFrames()
 	local	f3 = TGUnitFrames_AllocateUnitFrameTemplate("target","TGUnitDebug",UIParent,{{myPoint="RIGHT",anchorPoint="LEFT",dX=-2,dY=0}},{f2});
 end
 
+--[[
 local TGUF_DEBUG_AUTOFIND_LAYOUT =
 {
 	filters =
@@ -828,6 +837,7 @@ local TGUF_DEBUG_AUTOFIND_LAYOUT =
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_AUTOFIND_LAYOUT,"TGUnitDebugAutoFindLayout");
+]]
 
 local TGUF_DEBUG_CASTBAR_LAYOUT =
 {
@@ -864,7 +874,7 @@ function TGUnitFramesDebuggingComponent_OnPlayerEnteringWorld()
 		--TGUnitFrames_AllocateLayout("TGUnitDebugStupidPartyLayout");
 		TGUnitFrames_AllocateLayout("TGUnitDebugPartyLayout");
 		TGUnitFrames_AllocateLayout("TGUnitDebugTargetLayout");
-		TGUnitFrames_AllocateLayout("TGUnitDebugFocusLayout");
+		--TGUnitFrames_AllocateLayout("TGUnitDebugFocusLayout");
 		--TGUnitFrames_AllocateLayout("TGUnitDebugPlayerCastBarLayout");
 		--TGUnitFrames_AllocateLayout("TGUnitDebugAutoFindLayout")
 

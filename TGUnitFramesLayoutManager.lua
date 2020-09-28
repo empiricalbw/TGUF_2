@@ -118,7 +118,7 @@ function TGUnitFramesLayoutManagerFrame_NewAnchor(realFrame,parentFrame,anchors,
 	local	C = TGUnitFramesLayoutManagerFrame;
 	local	sx,sy = _G[anchorFrame:GetName().."Parent"]:GetCenter();
 	local	ex,ey = _G[parentFrame:GetName().."Handle"]:GetCenter();
-	DrawRouteLine(T,C,sx,sy,ex,ey,32);
+	--DrawRouteLine(T,C,sx,sy,ex,ey,32);
 	T:Show();
 	_G[anchorFrame:GetName().."AnchorLine"]:Hide();
 	

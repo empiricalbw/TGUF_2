@@ -48,7 +48,6 @@ local substitutionTable =
 	["$lv"] = {p = false, w = {"level"},f = function(v) if (v.level == -1) then return "??"; end; return v.level; end},
 	["$sty"] = {p = false, w = {"spell"},f = function(v) return v.spell.type; end},
 	["$ssp"] = {p = false, w = {"spell"},f = function(v) return v.spell.spell; end},
-	["$sra"] = {p = false, w = {"spell"},f = function(v) return v.spell.rank; end},
 	["$sdn"] = {p = false, w = {"spell"},f = function(v) return v.spell.displayName; end},
 	["$sic"] = {p = false, w = {"spell"},f = function(v) return v.spell.icon; end},
 	["$sst"] = {p = false, w = {"spell"},f = function(v) return v.spell.startTime; end},
@@ -209,6 +208,9 @@ end
 
 function TGUnitText_UnitUpdate(unit,frame)
 	--TGUFDebug("TGUnitText_UnitUpdate");
+    if (not unit.exists) then
+        return;
+    end
 	
 	-- Perform the substitutions
 	local	finalStr = frame.text;

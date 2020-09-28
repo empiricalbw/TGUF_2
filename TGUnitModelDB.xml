@@ -124,9 +124,11 @@
 			<OnHide>
 				TGUnitModelDB_OnHide(self);
 			</OnHide>
+            <!--
 			<OnAnimFinished>
 				TGUnitModelDB_OnAnimFinished(self);
 			</OnAnimFinished>
+            -->
 		</Scripts>
 	</Frame>
 </Ui>

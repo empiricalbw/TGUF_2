@@ -267,38 +267,38 @@ local TGUF_TEMPLATE_UNIT =
 		count = 32,
 		buff =
 		{
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=1,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=2,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=3,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=4,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=5,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=6,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=7,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=8,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=9,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=10,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=11,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=12,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=13,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=14,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=15,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=16,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=17,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=18,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=19,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=20,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=21,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=22,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=23,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=24,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=25,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=26,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=27,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=28,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=29,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=30,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=31,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=32,expirationTime=10,duration=-1}
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=1,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=2,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=3,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=4,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=5,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=6,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=7,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=8,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=9,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=10,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=11,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=12,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=13,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=14,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=15,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=16,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=17,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=18,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=19,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=20,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=21,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=22,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=23,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=24,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=25,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=26,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=27,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=28,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=29,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=30,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=31,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=32,expirationTime=10,duration=-1}
 		}
 	},
 	debuffs =
@@ -306,38 +306,38 @@ local TGUF_TEMPLATE_UNIT =
 		count = 32,
 		debuff =
 		{
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=1,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=2,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=3,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=4,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=5,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=6,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=7,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=8,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=9,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=10,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=11,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=12,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=13,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=14,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=15,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=16,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=17,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=18,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=19,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=20,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=21,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=22,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=23,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=24,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=25,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=26,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=27,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=28,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=29,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=30,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=31,expirationTime=10,duration=-1},
-			{name="Test",rank=1,texture="Interface\\CharacterFrame\\TempPortrait",applications=32,expirationTime=10,duration=-1}
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=1,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=2,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=3,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=4,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=5,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=6,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=7,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=8,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=9,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=10,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=11,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=12,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=13,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=14,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=15,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=16,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=17,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=18,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=19,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=20,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=21,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=22,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=23,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=24,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=25,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=26,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=27,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=28,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=29,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=30,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=31,expirationTime=10,duration=-1},
+			{name="Test",texture="Interface\\CharacterFrame\\TempPortrait",applications=32,expirationTime=10,duration=-1}
 		}
 	},
 	debuffCounts =
@@ -989,12 +989,12 @@ function TGUnitComponent_OnUnitPowerChange(event,unit)
 	
 	-- Update the energy
 	if (theUnit.mana.type == TGUF_EVENT_POWER_LIST[event]) then
-		theUnit.mana.current = UnitMana(unit);
+		theUnit.mana.current = UnitPower(unit);
 	else
 		--TGUFUnitDebug("Got "..event.." for unit "..unit.." but unit's power type was "..TGUF_POWER_TYPE_LIST[theUnit.mana.type+1]..".");
 		theUnit.mana.type = UnitPowerType(unit);
-		theUnit.mana.current = UnitMana(unit);
-		theUnit.mana.max = UnitManaMax(unit);
+		theUnit.mana.current = UnitPower(unit);
+		theUnit.mana.max = UnitPowerMax(unit);
 	end
 	TGUnitComponent_MarkUpdate("mana",theUnit);
 end
@@ -1011,12 +1011,12 @@ function TGUnitComponent_OnUnitMaxPowerChange(event,unit)
 	
 	-- Update the energy
 	if (theUnit.mana.type == TGUF_EVENT_POWER_LIST[event]) then
-		theUnit.mana.max = UnitManaMax(unit);
+		theUnit.mana.max = UnitPowerMax(unit);
 	else
 		--TGUFUnitDebug("Got "..event.." for unit "..unit.." but unit's power type was "..TGUF_POWER_TYPE_LIST[theUnit.mana.type+1]..".");
 		theUnit.mana.type = UnitPowerType(unit);
-		theUnit.mana.current = UnitMana(unit);
-		theUnit.mana.max = UnitManaMax(unit);
+		theUnit.mana.current = UnitPower(unit);
+		theUnit.mana.max = UnitPowerMax(unit);
 	end
 	TGUnitComponent_MarkUpdate("mana",theUnit);
 end
@@ -1033,8 +1033,8 @@ function TGUnitComponent_OnUnitPowerTypeChange(event,unit)
 	
 	-- Update the power
 	theUnit.mana.type = UnitPowerType(unit);
-	theUnit.mana.current = UnitMana(unit);
-	theUnit.mana.max = UnitManaMax(unit);
+	theUnit.mana.current = UnitPower(unit);
+	theUnit.mana.max = UnitPowerMax(unit);
 	TGUnitComponent_MarkUpdate("mana",theUnit);
 end
 
@@ -1264,7 +1264,7 @@ function TGUnitComponent_OnSpellcastUpdate(event,unit)
 	end
 	
 	-- Update the spellcast
-	theUnit.spell.spell, theUnit.spell.rank, theUnit.spell.displayName,
+	theUnit.spell.spell, theUnit.spell.displayName,
 		theUnit.spell.texture, theUnit.spell.startTime, theUnit.spell.endTime,
 		theUnit.spell.isTradeSkill = UnitCastingInfo(unit);
 	if (theUnit.spell.spell) then
@@ -1294,7 +1294,6 @@ function TGUnitComponent_OnSpellcastStop(event,unit)
 	if (theUnit.spell.type ~= nil) then
 		if (theUnit.spell.type == "Casting") then
 			theUnit.spell.spell = nil;
-			theUnit.spell.rank = nil;
 			theUnit.spell.displayName = nil;
 			theUnit.spell.texture = nil;
 			theUnit.spell.startTime = nil;
@@ -1337,7 +1336,7 @@ function TGUnitComponent_OnChannelUpdate(event,unit)
 	end
 	
 	-- Update the spellcast
-	theUnit.spell.spell, theUnit.spell.rank, theUnit.spell.displayName,
+	theUnit.spell.spell, theUnit.spell.displayName,
 		theUnit.spell.texture, theUnit.spell.startTime, theUnit.spell.endTime,
 		theUnit.spell.isTradeSkill = UnitChannelInfo(unit);
 	if (theUnit.spell.spell) then
@@ -1367,7 +1366,6 @@ function TGUnitComponent_OnChannelStop(event,unit)
 	if (theUnit.spell.type ~= nil) then
 		if (theUnit.spell.type == "Channelling") then
 			theUnit.spell.spell = nil;
-			theUnit.spell.rank = nil;
 			theUnit.spell.displayName = nil;
 			theUnit.spell.texture = nil;
 			theUnit.spell.startTime = nil;

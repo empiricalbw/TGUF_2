@@ -1063,12 +1063,12 @@
 				TGUnitFramesTemplateManagerFrame_OnUpdate(self);
 			</OnUpdate>
 			<OnShow>
-				PlaySound("igCharacterInfoOpen");
+				--PlaySound("igCharacterInfoOpen");
 				MainMenuBar:Hide();
 			</OnShow>
 			<OnHide>
 				MainMenuBar:Show();
-				PlaySound("igCharacterInfoClose");
+				--PlaySound("igCharacterInfoClose");
 			</OnHide>
 		</Scripts>
 	</Frame>

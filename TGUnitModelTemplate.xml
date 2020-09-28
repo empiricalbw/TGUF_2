@@ -26,9 +26,11 @@
 			<OnHide>
 				TGUnitModelTemplate_OnHide(self);
 			</OnHide>
+            <!--
 			<OnAnimFinished>
 				TGUnitModelTemplate_OnAnimFinished(self);
 			</OnAnimFinished>
+            -->
 		</Scripts>
 	</Frame>
 </Ui>

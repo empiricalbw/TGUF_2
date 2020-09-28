@@ -28,7 +28,6 @@ TGUnitClassificationTextureTemplate.xml
 TGUnitClassificationBorderTemplate.xml
 TGUnitComboTextureTemplate.xml
 TGUnitStatusBorderTemplate.xml
-TGUnitDebugTemplate.xml
 TGUnitFramesTemplateManager.xml
 TGUnitFramesLayoutManager.xml
 TGUnitFramesDebugging.lua

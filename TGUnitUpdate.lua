@@ -126,38 +126,40 @@ function TGUF_UpdateUnitManaType(unit,exists,existsChanged)
 end
 
 function TGUF_UpdateUnitMana(unit,exists,existsChanged)
-	return TGUF_UpdateUnitGenericX1(unit,exists,existsChanged,"mana","current",UnitMana);
+	return TGUF_UpdateUnitGenericX1(unit,exists,existsChanged,"mana","current",UnitPower);
 end
 
 function TGUF_UpdateUnitManaMax(unit,exists,existsChanged)
-	return TGUF_UpdateUnitGenericX1(unit,exists,existsChanged,"mana","max",UnitManaMax);
+	return TGUF_UpdateUnitGenericX1(unit,exists,existsChanged,"mana","max",UnitPowerMax);
 end
 
 function TGUF_UpdateUnitSpell(unit,exists,existsChanged)
+    if (unit.unit ~= "player") then
+        return false, false;
+    end
+
 	-- casting, changed = TGUF_UpdateUnitSpell(TGUFUnit)
 	if (exists) then
-		local newSpell, newRank, newDisplayName, newTexture;
+		local newSpell, newDisplayName, newTexture;
 		local newStartTime, newEndTime, newIsTradeSkill;
 		local newType;
 	
 		newSpell,
-		newRank,
 		newDisplayName,
 		newTexture,
 		newStartTime,
 		newEndTime,
-		newIsTradeSkill = UnitCastingInfo(unit.unit);
+		newIsTradeSkill = CastingInfo();
 	
 		if (newSpell ~= nil) then
 			newType = "Casting";
 		else
 			newSpell,
-			newRank,
 			newDisplayName,
 			newTexture,
 			newStartTime,
 			newEndTime,
-			newIsTradeSkill = UnitChannelInfo(unit.unit)
+			newIsTradeSkill = ChannelInfo()
 		
 			if (newSpell ~= nil) then
 				newType = "Channelling";
@@ -169,7 +171,6 @@ function TGUF_UpdateUnitSpell(unit,exists,existsChanged)
 				]]
 				newType         = nil;
 				newSpell        = nil;
-				newRank         = nil;
 				newDisplayName  = nil;
 				newTexture      = nil;
 				newStartTime    = nil;
@@ -186,13 +187,12 @@ function TGUF_UpdateUnitSpell(unit,exists,existsChanged)
 		end
 	
 		local changed = (newType ~= unit.spell.type or newSpell ~= unit.spell.spell
-		  or newRank ~= unit.spell.rank or newDisplayName ~= unit.spell.displayName
+		  or newDisplayName ~= unit.spell.displayName
 		  or newTexture ~= unit.spell.texture or newStartTime ~= unit.spell.startTime
 		  or newEndTime ~= unit.spell.endTime or newIsTradeSkill ~= unit.spell.isTradeSkill)
 		if (changed) then
 			unit.spell.type         = newType;
 			unit.spell.spell        = newSpell;
-			unit.spell.rank         = newRank;
 			unit.spell.displayName  = newDisplayName;
 			unit.spell.texture      = newTexture;
 			unit.spell.startTime    = newStartTime;
@@ -205,7 +205,6 @@ function TGUF_UpdateUnitSpell(unit,exists,existsChanged)
 		if (unit.spell.type ~= nil) then
 		  	unit.spell.type           = nil;
 		  	unit.spell.spell          = nil;
-		  	unit.spell.rank           = nil;
 		  	unit.spell.displayName    = nil;
 		  	unit.spell.texture        = nil;
 		  	unit.spell.startTime      = nil;
@@ -241,7 +240,6 @@ function TGUF_UpdateUnitBuffs(unit,exists,existsChanged)
 		for i=1,32 do
 			index = i;
 			buffCache.buff[i].name,
-			buffCache.buff[i].rank,
 			buffCache.buff[i].texture,
 			buffCache.buff[i].applications,
 			_,
@@ -254,7 +252,6 @@ function TGUF_UpdateUnitBuffs(unit,exists,existsChanged)
 		buffCache.count = index-1;
 		for j=index+1,32 do
 			buffCache.buff[j].name = nil;
-			buffCache.buff[j].rank = nil;
 			buffCache.buff[j].texture = nil;
 			buffCache.buff[j].applications = nil;
 			buffCache.buff[j].duration = nil;
@@ -262,7 +259,6 @@ function TGUF_UpdateUnitBuffs(unit,exists,existsChanged)
 		end
 		for i=1,32 do
 			if(buffCache.buff[i].name ~= unit.buffs.buff[i].name
-			  or buffCache.buff[i].rank ~= unit.buffs.buff[i].rank
 			  or buffCache.buff[i].texture ~= unit.buffs.buff[i].texture
 			  or buffCache.buff[i].applications ~= unit.buffs.buff[i].applications
 			  or buffCache.buff[i].duration ~= unit.buffs.buff[i].duration
@@ -284,7 +280,6 @@ function TGUF_UpdateUnitBuffs(unit,exists,existsChanged)
 				buffChanged = true;
 			end
 			unit.buffs.buff[i].name           = nil;
-			unit.buffs.buff[i].rank           = nil;
 			unit.buffs.buff[i].texture        = nil;
 			unit.buffs.buff[i].applications   = nil;
 			unit.buffs.buff[i].type           = nil;
@@ -318,7 +313,6 @@ function TGUF_UpdateUnitDebuffs(unit,exists,existsChanged)
 		for i=1,32 do
 			index = i;
 			debuffCache.debuff[i].name,
-			debuffCache.debuff[i].rank,
 			debuffCache.debuff[i].texture,
 			debuffCache.debuff[i].applications,
 			debuffType,
@@ -334,7 +328,6 @@ function TGUF_UpdateUnitDebuffs(unit,exists,existsChanged)
 		debuffCache.count = index-1;
 		for j=index+1,32 do
 			debuffCache.debuff[j].name           = nil;
-			debuffCache.debuff[j].rank           = nil;
 			debuffCache.debuff[j].texture        = nil;
 			debuffCache.debuff[j].applications   = nil;
 			debuffCache.debuff[j].type           = nil;
@@ -343,7 +336,6 @@ function TGUF_UpdateUnitDebuffs(unit,exists,existsChanged)
 		end
 		for i=1,32 do
 			if(debuffCache.debuff[i].name ~= unit.debuffs.debuff[i].name
-			  or debuffCache.debuff[i].rank ~= unit.debuffs.debuff[i].rank
 			  or debuffCache.debuff[i].texture ~= unit.debuffs.debuff[i].texture
 			  or debuffCache.debuff[i].applications ~= unit.debuffs.debuff[i].applications
 			  or debuffCache.debuff[i].type ~= unit.debuffs.debuff[i].type
@@ -388,7 +380,6 @@ function TGUF_UpdateUnitDebuffs(unit,exists,existsChanged)
 				debuffChanged = true;
 			end
 			unit.debuffs.debuff[i].name           = nil;
-			unit.debuffs.debuff[i].rank           = nil;
 			unit.debuffs.debuff[i].texture        = nil;
 			unit.debuffs.debuff[i].applications   = nil;
 			unit.debuffs.debuff[i].type           = nil;
@@ -475,11 +466,9 @@ function TGUF_UpdateUnitLiving(unit,exists,existsChanged)
 end
 
 function TGUF_UnitTapped(unitID)
-	if (UnitIsTappedByPlayer(unitID)) then
-		return TGUF_TAPPED_PLAYER;
-	elseif (UnitIsTapped(unitID)) then
+    if (UnitIsTapDenied(unitID)) then
 		return TGUF_TAPPED_OTHER;
-	end
+    end
 	return TGUF_TAPPED_NONE;
 end
 

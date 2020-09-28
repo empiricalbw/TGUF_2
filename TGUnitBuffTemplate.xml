@@ -7,7 +7,7 @@
 			<AbsDimension x="16" y="16"/>
 		</Size>
 		<Frames>
-			<Cooldown name="$parentCooldown" setAllPoints="true" hidden="true" reverse="true" drawEdge="true"/>
+			<Cooldown name="$parentCooldown" setAllPoints="true" hidden="true" reverse="true" drawEdge="true" inherits="CooldownFrameTemplate"/>
 		</Frames>
 		<Layers>
 			<Layer level="ARTWORK">
