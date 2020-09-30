@@ -134,11 +134,6 @@ function TGUF_UpdateUnitManaMax(unit,exists,existsChanged)
 end
 
 function TGUF_UpdateUnitSpell(unit,exists,existsChanged)
-    if (unit.unit ~= "player") then
-        return false, false;
-    end
-
-    -- casting, changed = TGUF_UpdateUnitSpell(TGUFUnit)
     if (exists) then
         local newSpell, newDisplayName, newTexture;
         local newStartTime, newEndTime, newIsTradeSkill;

@@ -75,7 +75,9 @@ local TGUF_INHEALINGRANGE = bit.lshift(1,20)
 local TGUF_CREATURETYPE   = bit.lshift(1,21)
 local TGUF_THREAT         = bit.lshift(1,22)
 local TGUF_LASTFLAG       = bit.lshift(1,23)
-local TGUF_ALLFLAGS       = TGUF_LASTFLAG - 1
+
+local TGUF_PLAYER_ALLFLAGS    = TGUF_LASTFLAG - 1
+local TGUF_NONPLAYER_ALLFLAGS = TGUF_LASTFLAG - 1 - TGUF_SPELL
 
 --[[
     This bitmask describes the set of attributes for which the game engine
@@ -107,7 +109,8 @@ local TGUF_PLAYERPOLL_MASK = bit.bor(
                                 TGUF_INHEALINGRANGE,
                                 TGUF_SPELL,
                                 TGUF_CREATURETYPE)
-if (bit.bor(TGUF_PLAYEREVENT_MASK,TGUF_PLAYERPOLL_MASK) ~= TGUF_ALLFLAGS) then
+if (bit.bor(TGUF_PLAYEREVENT_MASK,TGUF_PLAYERPOLL_MASK)
+    ~= TGUF_PLAYER_ALLFLAGS) then
     error("TGUF_PLAYER flags mismatch")
 end
 
@@ -141,10 +144,9 @@ local TGUF_NONPLAYERPOLL_MASK = bit.bor(
                                 TGUF_ISVISIBLE,
                                 TGUF_INHEALINGRANGE,
                                 TGUF_CREATURETYPE,
-                                TGUF_THREAT,
-                                TGUF_SPELL)
+                                TGUF_THREAT)
 if (bit.bor(TGUF_NONPLAYEREVENT_MASK,TGUF_NONPLAYERPOLL_MASK)
-    ~= TGUF_ALLFLAGS) then
+    ~= TGUF_NONPLAYER_ALLFLAGS) then
     error("TGUF_NONPLAYER flags mismatch")
 end
 
@@ -528,8 +530,11 @@ function TGUnitComponent_NewUnit(unit)
     
     -- Determine which attributes need polling
     if (unit == "player") then
+        theUnit.allFlags  = TGUF_PLAYER_ALLFLAGS
         theUnit.pollFlags = TGUF_PLAYERPOLL_MASK
     else
+        theUnit.allFlags = TGUF_NONPLAYER_ALLFLAGS
+
         local autoUnit = false
         for _,v in pairs(TGUF_AUTO_UNITS) do
             if (v == unit) then
@@ -540,7 +545,7 @@ function TGUnitComponent_NewUnit(unit)
         if (autoUnit) then
             theUnit.pollFlags = TGUF_NONPLAYERPOLL_MASK
         else
-            theUnit.pollFlags = TGUF_ALLFLAGS
+            theUnit.pollFlags = TGUF_NONPLAYER_ALLFLAGS
         end
     end
     
@@ -587,7 +592,7 @@ function TGUnitComponent_NewUnit(unit)
     theUnit.debuffCounts = {Magic=0,Curse=0,Disease=0,Poison=0}
     
     -- Update the unit
-    TGUnitComponent_UpdateUnit(unit,TGUF_ALLFLAGS)
+    TGUnitComponent_UpdateUnit(unit,theUnit.allFlags)
     TGUnitComponent_UpdateSpecialUnitsPeriodic()
     
     return theUnit
@@ -615,25 +620,6 @@ function TGUnitComponent_OnPeriodicUpdate()
         return
     end
     
-    -- Poll the units that are casting
-    for _,v in pairs(TGUF_CAST_LIST) do
-        if (currTime > v.spell.endTime) then
-            if (v.spell.type == "Casting") then
-                TGUFUnitDebug("Generating fake UNIT_SPELLCAST_STOP for "..
-                              v.unit)
-                TGUnitComponent_OnSpellcastStop("UNIT_SPELLCAST_STOP",v.unit)
-            elseif (v.spell.type == "Channelling") then
-                TGUFUnitDebug("Generating fake UNIT_SPELLCAST_CHANNEL_STOP "
-                              "for "..v.unit)
-                TGUnitComponent_OnChannelStop("UNIT_SPELLCAST_CHANNEL_STOP",
-                                              v.unit)
-            else
-                TGUFUnitDebug("Spell for unit "..v.unit..
-                              " ended, but it was an unknown cast type!")
-            end
-        end
-    end
-    
     -- Poll the elements of all units that require manual polling
     for _,v in pairs(TGUF_UNIT_LIST) do
         TGUnitComponent_UpdateUnit(v.unit,v.pollFlags)
@@ -652,7 +638,7 @@ end
 
 function TGUnitComponent_ForceUpdate()
     for _,v in pairs(TGUF_UNIT_LIST) do
-        TGUnitComponent_UpdateUnit(v.unit,TGUF_ALLFLAGS)
+        TGUnitComponent_UpdateUnit(v.unit,v.allFlags)
     end
     TGUnitComponent_UpdateSpecialUnitsPeriodic()
 end
@@ -700,7 +686,7 @@ end
 
 function TGUnitComponent_UpdateUnit(unit,flags)
     -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit]
+    local theUnit = TGUF_UNIT_LIST[unit]
     if (flags == nil) then
         TGUFMsg("Flags to TGUnitComponent_UpdateUnit was nil")
     end
@@ -917,11 +903,7 @@ function TGUnitComponent_UpdateUnit(unit,flags)
         TGUnitComponent_MarkUpdate("mana",theUnit)
     end
     if (spellChanged) then
-        TGUFUnitDebug(unit..".spell->"..tostring(newSpellDisplayName))
-        if (newSpellDisplayName == nil) then
-            local   stack = debugstack(2)
-            TGUFUnitDebug(stack)
-        end
+        TGUFUnitDebug(unit..".spell-iscasting->"..tostring(isCasting))
         TGUnitComponent_MarkUpdate("spell",theUnit)
     end
     if (levelChanged) then
@@ -1243,7 +1225,7 @@ end
 function TGUnitComponent_OnPlayerTargetChange(event)
     TGUFUnitDebug(event)
     for k,v in pairs(TGUF_TARGET_CHANGED_LIST) do
-        TGUnitComponent_UpdateUnit(k,TGUF_ALLFLAGS)
+        TGUnitComponent_UpdateUnit(k,v.allFlags)
         TGUnitComponent_MarkUpdate("model",v)
     end
     
@@ -1323,7 +1305,7 @@ function TGUnitComponent_OnUnitPet(event,unit)
     local   petUnit = unitPetMap[unit]
     if (petUnit ~= nil) then
         TGUFUnitDebug(event..": "..unit)
-        TGUnitComponent_UpdateUnit(petUnit,TGUF_ALLFLAGS)
+        TGUnitComponent_UpdateUnit(petUnit,TGUF_NONPLAYER_ALLFLAGS)
     end
 end
 
@@ -1334,16 +1316,16 @@ function TGUnitComponent_OnGroupRosterUpdate(event)
         local raidName = UnitName("raid"..i)
         if (raidName ~= raidRosterCache[i]) then
             raidRosterCache[i] = raidName
-            TGUnitComponent_UpdateUnit("raid"..i,TGUF_ALLFLAGS)
-            TGUnitComponent_UpdateUnit("raidpet"..i,TGUF_ALLFLAGS)
+            TGUnitComponent_UpdateUnit("raid"..i,TGUF_NONPLAYER_ALLFLAGS)
+            TGUnitComponent_UpdateUnit("raidpet"..i,TGUF_NONPLAYER_ALLFLAGS)
         end
     end
     for i=1,4 do
         local partyName = UnitName("party"..i)
         if (partyName ~= partyCache[i]) then
             partyCache[i] = partyName
-            TGUnitComponent_UpdateUnit("party"..i,TGUF_ALLFLAGS)
-            TGUnitComponent_UpdateUnit("partypet"..i,TGUF_ALLFLAGS)
+            TGUnitComponent_UpdateUnit("party"..i,TGUF_NONPLAYER_ALLFLAGS)
+            TGUnitComponent_UpdateUnit("partypet"..i,TGUF_NONPLAYER_ALLFLAGS)
         end
     end
     TGRaidSorter_OnRaidRosterUpdate()
@@ -1351,186 +1333,7 @@ end
 
 function TGUnitComponent_OnMouseoverChanged(event)
     TGUFUnitDebug(event)
-    TGUnitComponent_UpdateUnit("mouseover",TGUF_ALLFLAGS)
-end
-
-function TGUnitComponent_OnSpellcastSent(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit)
-    if (unit == "player") then
-        -- See if we are watching this unit
-        local   theUnit = TGUF_UNIT_LIST[unit]
-        if (theUnit == nil) then
-            return
-        end
-        theUnit.spell.sendTime = GetTime()
-    end
-end
-
-function TGUnitComponent_OnSpellcastStart(event,unit)
-    if (unit == "player") then
-        local   theUnit = TGUF_UNIT_LIST[unit]
-        if (theUnit == nil) then
-            return
-        end
-        if (not theUnit.spell.sendTime) then
-            theUnit.spell.sendTime = GetTime()
-        end
-        theUnit.spell.timeDiff = GetTime() - theUnit.spell.sendTime
-        if (theUnit.spell.timeDiff > 1) then
-            theUnit.spell.timeDiff = 0
-        end
-    end
-    
-    TGUnitComponent_OnSpellcastUpdate(event,unit)
-end
-
-function TGUnitComponent_OnSpellcastUpdate(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit)
-    
-    -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit]
-    if (theUnit == nil) then
-        return
-    end
-    
-    -- Update the spellcast
-    theUnit.spell.spell, theUnit.spell.displayName,
-        theUnit.spell.texture, theUnit.spell.startTime, theUnit.spell.endTime,
-        theUnit.spell.isTradeSkill = UnitCastingInfo(unit)
-    if (theUnit.spell.spell) then
-        theUnit.spell.type = "Casting"
-        theUnit.spell.startTime = theUnit.spell.startTime / 1000.0
-        theUnit.spell.endTime = theUnit.spell.endTime / 1000.0
-        TGUF_CAST_LIST[theUnit.unit] = theUnit
-    else
-        theUnit.spell.type = nil
-        TGUF_CAST_LIST[theUnit.unit] = nil
-        TGUFWarning("Get spellcast started event for unit "..unit..
-                    " but UnitCastingInfo returned nil!")
-    end
-    TGUnitComponent_MarkUpdate("spell",theUnit)
-end
-
-function TGUnitComponent_OnSpellcastStop(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit)
-    
-    -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit]
-    if (theUnit == nil) then
-        return
-    end
-    
-    -- Update the spellcast
-    if (theUnit.spell.type ~= nil) then
-        if (theUnit.spell.type == "Casting") then
-            theUnit.spell.spell        = nil
-            theUnit.spell.displayName  = nil
-            theUnit.spell.texture      = nil
-            theUnit.spell.startTime    = nil
-            theUnit.spell.endTime      = nil
-            theUnit.spell.isTradeSkill = nil
-            theUnit.spell.type         = nil
-            TGUnitComponent_MarkUpdate("spell",theUnit)
-            TGUF_CAST_LIST[theUnit.unit] = nil
-        else
-            TGUFWarning("Got spellcast stop event for unit "..unit..
-                        " but was "..theUnit.spell.type..".")
-        end
-    else
-        TGUFUnitDebug("Got spellcast stop event for unit "..unit..
-                      " but no spell was in progress.")
-    end
-end
-
-function TGUnitComponent_OnChannelStart(event,unit)
-    if (unit == "player") then
-        local   theUnit = TGUF_UNIT_LIST[unit]
-        if (theUnit == nil) then
-            return
-        end
-        theUnit.spell.timeDiff = GetTime() - theUnit.spell.sendTime
-        if (theUnit.spell.timeDiff > 1) then
-            theUnit.spell.timeDiff = 0
-        end
-    end
-    
-    TGUnitComponent_OnChannelUpdate(event,unit)
-end
-
-function TGUnitComponent_OnChannelUpdate(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit)
-    
-    -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit]
-    if (theUnit == nil) then
-        return
-    end
-    
-    -- Update the spellcast
-    theUnit.spell.spell,
-    theUnit.spell.displayName,
-    theUnit.spell.texture,
-    theUnit.spell.startTime,
-    theUnit.spell.endTime,
-    theUnit.spell.isTradeSkill = UnitChannelInfo(unit)
-    if (theUnit.spell.spell) then
-        theUnit.spell.type = "Channelling"
-        theUnit.spell.startTime = theUnit.spell.startTime / 1000.0
-        theUnit.spell.endTime = theUnit.spell.endTime / 1000.0
-        TGUF_CAST_LIST[theUnit.unit] = theUnit
-    else
-        theUnit.spell.type = nil
-        TGUF_CAST_LIST[theUnit.unit] = nil
-        TGUFUnitDebug("Get channelling started event for unit "..unit..
-                      " but UnitChannelInfo returned nil!")
-    end
-    TGUnitComponent_MarkUpdate("spell",theUnit)
-end
-
-function TGUnitComponent_OnChannelStop(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit)
-    
-    -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit]
-    if (theUnit == nil) then
-        return
-    end
-    
-    -- Update the spellcast
-    if (theUnit.spell.type ~= nil) then
-        if (theUnit.spell.type == "Channelling") then
-            theUnit.spell.spell = nil
-            theUnit.spell.displayName = nil
-            theUnit.spell.texture = nil
-            theUnit.spell.startTime = nil
-            theUnit.spell.endTime = nil
-            theUnit.spell.isTradeSkill = nil
-            theUnit.spell.type = nil
-            TGUnitComponent_MarkUpdate("spell",theUnit)
-            TGUF_CAST_LIST[theUnit.unit] = nil
-        else
-            TGUFUnitDebug("Got channel stop event for unit "..unit..
-                          " but was "..theUnit.spell.type..".")
-        end
-    else
-        TGUFUnitDebug("Got channel stop event for unit "..unit..
-                      " but no spell was in progress.")
-    end
-end
-
-function TGUnitComponent_OnSpellSucceeded(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit)
-end
-
-function TGUnitComponent_OnSpellMiss(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit)
+    TGUnitComponent_UpdateUnit("mouseover",TGUF_NONPLAYER_ALLFLAGS)
 end
 
 function TGUnitComponent_OnPlayerEnterCombat(event)
@@ -1574,22 +1377,6 @@ local TGUnitComponent = {
     ["onUnitMaxHealthChange"] = TGUnitComponent_OnUnitMaxHealthChange,
     ["onUnitLevelChange"]     = TGUnitComponent_OnUnitLevelChange,
     ["onPlayerTargetChange"]  = TGUnitComponent_OnPlayerTargetChange,
-
-    -- Spellcast stuff used by cast tracker is currently disabled.
-    --[[
-    ["onSpellcastSent"]          = TGUnitComponent_OnSpellcastSent,
-    ["onSpellcastStart"]         = TGUnitComponent_OnSpellcastStart,
-    ["onSpellcastDelayed"]       = TGUnitComponent_OnSpellcastUpdate,
-    ["onSpellcastStop"]          = TGUnitComponent_OnSpellcastStop,
-    ["onSpellcastFailed"]        = TGUnitComponent_OnSpellcastStop,
-    ["onSpellcastInterrupted"]   = TGUnitComponent_OnSpellcastStop,
-    ["onSpellcastChannelStart"]  = TGUnitComponent_OnChannelStart,
-    ["onSpellcastChannelUpdate"] = TGUnitComponent_OnChannelUpdate,
-    ["onSpellcastChannelStop"]   = TGUnitComponent_OnChannelStop,
-    ["onSpellcastMiss"]          = TGUnitComponent_OnSpellMiss,
-    ["onSpellcastSucceeded"]     = TGUnitComponent_OnSpellSucceeded,
-    ]]
-
     ["onUnitPet"]             = TGUnitComponent_OnUnitPet,
     ["onGroupJoined"]         = TGUnitComponent_OnGroupRosterUpdate,
     ["onGroupRosterUpdate"]   = TGUnitComponent_OnGroupRosterUpdate,
