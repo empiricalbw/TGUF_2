@@ -42,7 +42,6 @@ function TGUnitFrames_RegisterComponent(component)
         if (TGUF_DISPATCH_LIST[k] == nil) then
             TGUF_DISPATCH_LIST[k] = {};
         end
-        --TGUFDebug("Inserting function "..tostring(v).." into "..k.." dispatch list.");
         table.insert(TGUF_DISPATCH_LIST[k],v);
     end
 end
