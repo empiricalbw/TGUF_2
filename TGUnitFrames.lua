@@ -1,38 +1,40 @@
-TGUF_SHORT_VERSION_STR = "1.0a1"
-TGUF_VERSION_STR = "TGUnitFrames "..TGUF_SHORT_VERSION_STR;
-local TGUF_COMPONENTS = {}
-local TGUF_DISPATCH_LIST = {}
-local TGUF_EVENT_DISPATCH_TABLE = {
-    ["ADDON_LOADED"] = "onAddonLoaded",
-    ["PLAYER_ENTERING_WORLD"] = "onPlayerEnteringWorld",
-    ["CVAR_UPDATE"] = "onCVARUpdate",
-    ["UNIT_MANA"] = "onUnitPowerChange",
-    ["UNIT_HAPPINESS"] = "onUnitPowerChange",
-    ["UNIT_DISPLAYPOWER"] = "onUnitPowerTypeChange",
-    ["UNIT_HEALTH"] = "onUnitHealthChange",
-    ["UNIT_MAXHEALTH"] = "onUnitMaxHealthChange",
-    ["UNIT_LEVEL"] = "onUnitLevelChange",
-    ["PLAYER_TARGET_CHANGED"] = "onPlayerTargetChange",
-    ["UNIT_SPELLCAST_START"] = "onSpellcastStart",
-    ["UNIT_SPELLCAST_DELAYED"] = "onSpellcastDelayed",
-    ["UNIT_SPELLCAST_STOP"] = "onSpellcastStop",
-    ["UNIT_SPELLCAST_FAILED"] = "onSpellcastFailed",
-    ["UNIT_SPELLCAST_INTERRUPTED"] = "onSpellcastInterrupted",
-    ["UNIT_SPELLCAST_CHANNEL_START"] = "onSpellcastChannelStart",
+TGUF_SHORT_VERSION_STR   = "1.0a1"
+TGUF_VERSION_STR         = "TGUnitFrames "..TGUF_SHORT_VERSION_STR;
+
+local TGUF_COMPONENTS           = {}
+local TGUF_DISPATCH_LIST        = {}
+local TGUF_EVENT_DISPATCH_TABLE =
+{
+    ["ADDON_LOADED"]                  = "onAddonLoaded",
+    ["PLAYER_ENTERING_WORLD"]         = "onPlayerEnteringWorld",
+    ["CVAR_UPDATE"]                   = "onCVARUpdate",
+    ["UNIT_MANA"]                     = "onUnitPowerChange",
+    ["UNIT_HAPPINESS"]                = "onUnitPowerChange",
+    ["UNIT_DISPLAYPOWER"]             = "onUnitPowerTypeChange",
+    ["UNIT_HEALTH"]                   = "onUnitHealthChange",
+    ["UNIT_MAXHEALTH"]                = "onUnitMaxHealthChange",
+    ["UNIT_LEVEL"]                    = "onUnitLevelChange",
+    ["PLAYER_TARGET_CHANGED"]         = "onPlayerTargetChange",
+    ["UNIT_SPELLCAST_START"]          = "onSpellcastStart",
+    ["UNIT_SPELLCAST_DELAYED"]        = "onSpellcastDelayed",
+    ["UNIT_SPELLCAST_STOP"]           = "onSpellcastStop",
+    ["UNIT_SPELLCAST_FAILED"]         = "onSpellcastFailed",
+    ["UNIT_SPELLCAST_INTERRUPTED"]    = "onSpellcastInterrupted",
+    ["UNIT_SPELLCAST_CHANNEL_START"]  = "onSpellcastChannelStart",
     ["UNIT_SPELLCAST_CHANNEL_UPDATE"] = "onSpellcastChannelUpdate",
-    ["UNIT_SPELLCAST_CHANNEL_STOP"] = "onSpellcastChannelStop",
-    ["UNIT_SPELLCAST_SUCCEEDED"] = "onSpellcastSucceeded",
-    ["UNIT_SPELLCAST_SENT"] = "onSpellcastSent",
-    ["UNIT_PET"] = "onUnitPet",
-    ["GROUP_JOINED"] = "onGroupJoined",
-    ["GROUP_ROSTER_UPDATE"] = "onGroupRosterUpdate",
-    ["UPDATE_MOUSEOVER_UNIT"] = "onMouseoverChanged",
-    ["UNIT_AURA"] = "onUnitAuraChanged",
-    ["PLAYER_REGEN_DISABLED"] = "onPlayerRegenDisabled",
-    ["PLAYER_REGEN_ENABLED"] = "onPlayerRegenEnabled",
-    ["UNIT_MODEL_CHANGED"] = "onUnitModelChange",
-    ["UNIT_NAME_UPDATE"] = "onUnitNameChange",
-    };
+    ["UNIT_SPELLCAST_CHANNEL_STOP"]   = "onSpellcastChannelStop",
+    ["UNIT_SPELLCAST_SUCCEEDED"]      = "onSpellcastSucceeded",
+    ["UNIT_SPELLCAST_SENT"]           = "onSpellcastSent",
+    ["UNIT_PET"]                      = "onUnitPet",
+    ["GROUP_JOINED"]                  = "onGroupJoined",
+    ["GROUP_ROSTER_UPDATE"]           = "onGroupRosterUpdate",
+    ["UPDATE_MOUSEOVER_UNIT"]         = "onMouseoverChanged",
+    ["UNIT_AURA"]                     = "onUnitAuraChanged",
+    ["PLAYER_REGEN_DISABLED"]         = "onPlayerRegenDisabled",
+    ["PLAYER_REGEN_ENABLED"]          = "onPlayerRegenEnabled",
+    ["UNIT_MODEL_CHANGED"]            = "onUnitModelChange",
+    ["UNIT_NAME_UPDATE"]              = "onUnitNameChange",
+}
     
 function TGUnitFrames_RegisterComponent(component)
     table.insert(TGUF_COMPONENTS,component);
@@ -54,7 +56,8 @@ function TGUnitFrames_DispatchComponent(handler,...)
         if (v ~= nil) then
             v(...);
         else
-            TGUFDebug("Attempted to call a nil handler function in the "..handler.." dispatch list.");
+            TGUFDebug("Attempted to call a nil handler function in the "..
+                      handler.." dispatch list.");
         end
     end
 end
