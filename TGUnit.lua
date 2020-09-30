@@ -1,6 +1,6 @@
 --[[
 	This is a list of all the unit ID's that we are keeping track of.  The unit ID
-	("target","player","focus","raid12",etc...) is used as the key into the table
+	("target","player","raid12",etc...) is used as the key into the table
 	and the value is the unit information for that unit.
 ]]
 local TGUF_UNIT_LIST = {};
@@ -18,12 +18,6 @@ TGUF_CAST_LIST = {};
 	target changes.  These units are all of the form "target*".
 ]]
 local TGUF_TARGET_CHANGED_LIST = {};
-
---[[
-	This is a list of all the unit ID's that need to be updated when the player's
-	focus changes.  These units are all of the form "focus*".
-]]
-local TGUF_FOCUS_CHANGED_LIST = {};
 
 --[[
 	This is a list of the different types of power that a unit can have as well
@@ -122,7 +116,7 @@ end
 --[[
 	This bitmask describes the set of attributes for which the game engine generates
 	events notifying us of a change for all of the non-player unit IDs which the game
-	generates events for: target, focus, pet, mouseover, partX, raidX
+	generates events for: target, pet, mouseover, partX, raidX
 	
 	See note above for information about polling mana.
 ]]
@@ -169,17 +163,11 @@ TGUF_HEALING_SPELL = nil;
 --[[
 	This is the list of all unit ID's that the game interface will generate events
 	for to update their statistics.  Any other units need to be manually polled.
-	Focus is a special case - when you set the focus, it will auto-generate events
-	but if you leave so your focus target disappears and then come back into range
-	it will not auto-generate events.  So treat it like a polled unit.
-	
-	^^^ That focus comment is no longer the case, if you go out of range of your
-	focus it permanently clears your focus target.
 	
 	The game engine is supposed to generate TGUF_PLAYEREVENT_MASK events for these
 	units, so we should not need to poll those attributes for these units.
 ]]
-local TGUF_AUTO_UNITS = {	"player", "target", "focus", "pet", "mouseover", "party1", "party2", "party3", "party4",
+local TGUF_AUTO_UNITS = {	"player", "target", "pet", "mouseover", "party1", "party2", "party3", "party4",
 							"raid1", "raid2", "raid3", "raid4", "raid5", "raid6", "raid7", "raid8", "raid9", "raid10",
 							"raid11", "raid12", "raid13", "raid14", "raid15", "raid16", "raid17", "raid18", "raid19", "raid20",
 							"raid21", "raid22", "raid23", "raid24", "raid25", "raid26", "raid27", "raid28", "raid29", "raid30",
@@ -523,9 +511,6 @@ function TGUnitComponent_NewUnit(unit)
 	TGUF_UNIT_LIST[unit] = theUnit;
 	if (string.find(unit,"^target")) then
 		TGUF_TARGET_CHANGED_LIST[unit] = theUnit;
-	end
-	if (string.find(unit,"^focus")) then
-		TGUF_FOCUS_CHANGED_LIST[unit] = theUnit;
 	end
 	theUnit.debuffCounts = {Magic=0,Curse=0,Disease=0,Poison=0};
 	
@@ -1174,13 +1159,6 @@ function TGUnitComponent_OnPlayerTargetChange(event)
 	TGUnitComponent_UpdateSpecialUnitsPeriodic();
 end
 
-function TGUnitComponent_OnPlayerFocusChange(event)
-	TGUFUnitDebug(event);
-	for k,_ in pairs(TGUF_FOCUS_CHANGED_LIST) do
-		TGUnitComponent_UpdateUnit(k,TGUF_ALLFLAGS);
-	end
-end
-
 local unitPetMap = {	["player"]="pet", ["party1"]="partypet1", ["party2"]="partypet2", ["party3"]="partypet3", ["party4"]="partypet4",
 						["raid1"]="raidpet1", ["raid2"]="raidpet2", ["raid3"]="raidpet3", ["raid4"]="raidpet4", ["raid5"]="raidpet5", ["raid6"]="raidpet6", ["raid7"]="raidpet7", ["raid8"]="raidpet8", ["raid9"]="raidpet9", ["raid10"]="raidpet10",
 						["raid11"]="raidpet11", ["raid12"]="raidpet12", ["raid13"]="raidpet13", ["raid14"]="raidpet14", ["raid15"]="raidpet15", ["raid16"]="raidpet16", ["raid17"]="raidpet17", ["raid18"]="raidpet18", ["raid19"]="raidpet19", ["raid20"]="raidpet20",
@@ -1433,7 +1411,6 @@ local TGUnitComponent = {
 	["onUnitMaxHealthChange"] = TGUnitComponent_OnUnitMaxHealthChange,
 	["onUnitLevelChange"] = TGUnitComponent_OnUnitLevelChange,
 	["onPlayerTargetChange"] = TGUnitComponent_OnPlayerTargetChange,
-	["onPlayerFocusChange"] = TGUnitComponent_OnPlayerFocusChange,
 	--[[
 	["onSpellcastSent"] = TGUnitComponent_OnSpellcastSent,
 	["onSpellcastStart"] = TGUnitComponent_OnSpellcastStart,
