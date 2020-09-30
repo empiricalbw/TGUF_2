@@ -63,27 +63,26 @@ end
 
 function TGUnitFrames_OnLoad(frame)
     -- Register for events we are interested in
-    for k,_ in pairs(TGUF_EVENT_DISPATCH_TABLE) do
-        frame:RegisterEvent(k);
+    for k, _ in pairs(TGUF_EVENT_DISPATCH_TABLE) do
+        frame:RegisterEvent(k)
     end
-    
-    -- Set up slash commands
-    SlashCmdList["TGUNITFRAMESTEMPLATEMANAGER"] = TGUnitFramesTemplateManager_Slash;
-    SLASH_TGUNITFRAMESTEMPLATEMANAGER1 = "/tguf";
-    SlashCmdList["TGUNITFRAMESMODELDB"] = TGUnitFramesModelDB_Slash;
-    SLASH_TGUNITFRAMESMODELDB1 = "/tgmd";
-    SlashCmdList["TGUNITFRAMESMODELDBLIST"] = TGUnitFramesModelDB_List;
-    SLASH_TGUNITFRAMESMODELDBLIST1 = "/tgmdl";
-    SlashCmdList["TGUNITFRAMESLAYOUTMANAGER"] = TGUnitFramesLayoutManager_Slash;
-    SLASH_TGUNITFRAMESLAYOUTMANAGER1 = "/tglm";
-    SlashCmdList["AUTOTARGETNAME"] = AutoTarget_Name;
-    SLASH_AUTOTARGETNAME1 = "/atnm";
-    SlashCmdList["AUTOTARGETOFF"] = AutoTarget_Off;
-    SLASH_AUTOTARGETOFF1 = "/atoff";
-    SlashCmdList["SOUNDFXOFF"] = SoundFX_Off;
-    SLASH_SOUNDFXOFF1 = "/sf0";
-    SlashCmdList["SOUNDFXON"] = SoundFX_On;
-    SLASH_SOUNDFXON1 = "/sf1";
+
+    -- Register slash commands
+    local slash_table =
+    {
+        tguf  = TGUnitFramesTemplateManager_Slash,
+        tgmd  = TGUnitFramesModelDB_Slash,
+        tgmdl = TGUnitFramesModelDB_List,
+        tglm  = TGUnitFramesLayoutManager_Slash,
+        atnm  = AutoTarget_Name,
+        atoff = AutoTarget_Off,
+        sf0   = SoundFX_Off,
+        sf1   = SoundFX_On,
+    }
+    for k, f in pairs(slash_table) do
+        SlashCmdList[k] = f
+        _G["SLASH_"..k.."1"] = "/"..k
+    end
 end
 
 function SoundFX_Off()
