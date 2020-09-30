@@ -19,6 +19,7 @@ TGUnitCombatIconTemplate.xml
 TGUnitLeaderIconTemplate.xml
 TGUnitLootMasterIconTemplate.xml
 TGUnitRaidTargetIconTemplate.xml
+TGUnitPVPIconTemplate.xml
 TGUnitTextTemplate.xml
 TGUnitBuffTemplate.xml
 TGUnitProcTemplate.xml
