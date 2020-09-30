@@ -25,17 +25,12 @@ local TGUF_TARGET_CHANGED_LIST = {};
     power type.
 ]]
 TGUF_POWER_TYPE_LIST = {"Mana","Rage","Focus","Energy","Happiness"};
-local TGUF_EVENT_POWER_LIST = { ["UNIT_MANA"] = 0,
-                                ["UNIT_MAXMANA"] = 0,
-                                ["UNIT_RAGE"] = 1,
-                                ["UNIT_MAXRAGE"] = 1,
-                                ["UNIT_FOCUS"] = 2,
-                                ["UNIT_MAXFOCUS"] = 2,
-                                ["UNIT_ENERGY"] = 3,
-                                ["UNIT_MAXENERGY"] = 3,
-                                ["UNIT_HAPPINESS"] = 4,
-                                ["UNIT_MAXHAPPINESS"] = 4
-                                };
+local TGUF_EVENT_POWER_LIST = {["MANA"]      = 0,
+                               ["RAGE"]      = 1,
+                               ["FOCUS"]     = 2,
+                               ["ENERGY"]    = 3,
+                               ["HAPPINESS"] = 4,
+                               };
                             
 --[[
     This is the period between poll updates for units that the game interface
@@ -76,12 +71,9 @@ local TGUF_LASTFLAG       = bit.lshift(1,23);
 local TGUF_ALLFLAGS       = TGUF_LASTFLAG - 1;
 
 --[[
-    This bitmask describes the set of attributes for which the game engine generates
-    events notifying us of a change.  These events are generated only for the player.
-    Note that we special-case mana here.  The game generates periodic mana updates
-    every few seconds but as of 3.0.2 the UnitMana() updates in REAL-TIME.  This means
-    that we need to poll it periodically to get the smooth mana regen the same way
-    that the Blizzard UI does.
+    This bitmask describes the set of attributes for which the game engine
+    generates events notifying us of a change.  These events are generated only
+    for the player.
 ]]
 local TGUF_PLAYEREVENT_MASK = bit.bor(
                                 TGUF_ISPLAYERTARGET,
@@ -89,14 +81,13 @@ local TGUF_PLAYEREVENT_MASK = bit.bor(
                                 TGUF_NAME,
                                 TGUF_CLASS,
                                 TGUF_HEALTH,
-                                --TGUF_MANA,
+                                TGUF_MANA,
                                 TGUF_LEVEL,
                                 TGUF_COMBAT,
                                 TGUF_BUFFS,
                                 TGUF_DEBUFFS,
                                 TGUF_THREAT);
 local TGUF_PLAYERPOLL_MASK = bit.bor(
-                                TGUF_MANA,
                                 TGUF_REACTION,
                                 TGUF_LEADER,
                                 TGUF_RAIDICON,
@@ -114,23 +105,22 @@ if (bit.bor(TGUF_PLAYEREVENT_MASK,TGUF_PLAYERPOLL_MASK) ~= TGUF_ALLFLAGS) then
 end
 
 --[[
-    This bitmask describes the set of attributes for which the game engine generates
-    events notifying us of a change for all of the non-player unit IDs which the game
-    generates events for: target, pet, mouseover, partX, raidX
-    
-    See note above for information about polling mana.
+    This bitmask describes the set of attributes for which the game engine
+    generates events notifying us of a change for all of the non-player unit
+    IDs which the game generates events for:
+
+        target, pet, mouseover, partX, raidX
 ]]
 local TGUF_NONPLAYEREVENT_MASK = bit.bor(
                                 TGUF_ISPLAYERTARGET,
                                 TGUF_NAME,
                                 TGUF_CLASS,
                                 TGUF_HEALTH,
-                                --TGUF_MANA,
+                                TGUF_MANA,
                                 TGUF_LEVEL,
                                 TGUF_BUFFS,
                                 TGUF_DEBUFFS);
 local TGUF_NONPLAYERPOLL_MASK = bit.bor(
-                                TGUF_MANA,
                                 TGUF_COMBOPOINTS,
                                 TGUF_COMBAT,
                                 TGUF_REACTION,
@@ -962,65 +952,69 @@ function TGUnitComponent_UpdateSpecialUnitsPeriodic()
     end
 end
 
-function TGUnitComponent_OnUnitPowerChange(event,unit)
+function TGUnitComponent_OnUnitPowerChange(event, unit, powerType)
     -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit);
+    TGUFUnitDebug(event.."["..powerType.."]: "..unit)
     
     -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit];
+    local theUnit = TGUF_UNIT_LIST[unit]
     if (theUnit == nil) then
-        return;
+        return
+    end
+    
+    -- Update the energy
+    if (theUnit.mana.type == TGUF_EVENT_POWER_LIST[powerType]) then
+        theUnit.mana.current = UnitPower(unit)
+    else
+        TGUFUnitDebug("Got "..event.." for unit "..unit..
+                      " but unit's power type was "..
+                      TGUF_POWER_TYPE_LIST[theUnit.mana.type+1]..".")
+        theUnit.mana.type    = UnitPowerType(unit)
+        theUnit.mana.current = UnitPower(unit)
+        theUnit.mana.max     = UnitPowerMax(unit)
+    end
+    TGUnitComponent_MarkUpdate("mana",theUnit)
+end
+
+function TGUnitComponent_OnUnitMaxPowerChange(event, unit, powerType)
+    -- Get the unit ID
+    TGUFUnitDebug(event.."["..powerType.."]: "..unit)
+    
+    -- See if we are watching this unit
+    local theUnit = TGUF_UNIT_LIST[unit]
+    if (theUnit == nil) then
+        return
     end
     
     -- Update the energy
     if (theUnit.mana.type == TGUF_EVENT_POWER_LIST[event]) then
-        theUnit.mana.current = UnitPower(unit);
+        theUnit.mana.max = UnitPowerMax(unit)
     else
-        --TGUFUnitDebug("Got "..event.." for unit "..unit.." but unit's power type was "..TGUF_POWER_TYPE_LIST[theUnit.mana.type+1]..".");
-        theUnit.mana.type = UnitPowerType(unit);
-        theUnit.mana.current = UnitPower(unit);
-        theUnit.mana.max = UnitPowerMax(unit);
+        TGUFUnitDebug("Got "..event.." for unit "..unit..
+                      " but unit's power type was "..
+                      TGUF_POWER_TYPE_LIST[theUnit.mana.type+1]..".")
+        theUnit.mana.type    = UnitPowerType(unit)
+        theUnit.mana.current = UnitPower(unit)
+        theUnit.mana.max     = UnitPowerMax(unit)
     end
-    TGUnitComponent_MarkUpdate("mana",theUnit);
+    TGUnitComponent_MarkUpdate("mana",theUnit)
 end
 
-function TGUnitComponent_OnUnitMaxPowerChange(event,unit)
+function TGUnitComponent_OnUnitPowerTypeChange(event, unit)
     -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit);
+    TGUFUnitDebug(event..": "..unit)
     
     -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit];
+    local   theUnit = TGUF_UNIT_LIST[unit]
     if (theUnit == nil) then
-        return;
-    end
-    
-    -- Update the energy
-    if (theUnit.mana.type == TGUF_EVENT_POWER_LIST[event]) then
-        theUnit.mana.max = UnitPowerMax(unit);
-    else
-        --TGUFUnitDebug("Got "..event.." for unit "..unit.." but unit's power type was "..TGUF_POWER_TYPE_LIST[theUnit.mana.type+1]..".");
-        theUnit.mana.type = UnitPowerType(unit);
-        theUnit.mana.current = UnitPower(unit);
-        theUnit.mana.max = UnitPowerMax(unit);
-    end
-    TGUnitComponent_MarkUpdate("mana",theUnit);
-end
-
-function TGUnitComponent_OnUnitPowerTypeChange(event,unit)
-    -- Get the unit ID
-    TGUFUnitDebug(event..": "..unit);
-    
-    -- See if we are watching this unit
-    local   theUnit = TGUF_UNIT_LIST[unit];
-    if (theUnit == nil) then
-        return;
+        return
     end
     
     -- Update the power
-    theUnit.mana.type = UnitPowerType(unit);
-    theUnit.mana.current = UnitPower(unit);
-    theUnit.mana.max = UnitPowerMax(unit);
-    TGUnitComponent_MarkUpdate("mana",theUnit);
+    theUnit.mana.type    = UnitPowerType(unit)
+    theUnit.mana.current = UnitPower(unit)
+    theUnit.mana.max     = UnitPowerMax(unit)
+    TGUnitComponent_MarkUpdate("mana",theUnit)
 end
 
 function TGUnitComponent_OnUnitHealthChange(event,unit)
