@@ -1,43 +1,43 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	<Script file="TGUnitProcTemplate.lua"/>
-	
-	<!-- This frame is the generic text element -->
-	<Frame name="TGUnitProcTemplate" hidden="true" virtual="true">
-		<Size>
-			<AbsDimension x="16" y="16"/>
-		</Size>
-		<Frames>
-			<Frame name="$parentChild" setAllPoints="true">
-				<Frames>
-					<Cooldown name="$parentCooldown" setAllPoints="true" hidden="true"/>
-				</Frames>
-				<Layers>
-					<Layer level="ARTWORK">
-						<Texture name="$parentIcon">
-							<Anchors>
-								<Anchor point="TOPLEFT"/>
-								<Anchor point="BOTTOMRIGHT"/>
-							</Anchors>
-						</Texture>
-					</Layer>
-					<Layer level="OVERLAY">
-						<FontString name="$parentCount" setAllPoints="true" justifyH="RIGHT" justifyV="BOTTOM" inherits="NumberFontNormalSmall"/>
-					</Layer>
-				</Layers>
-				<Scripts>
-					<OnEnter>
-						TGUnitProcTemplate_OnEnter(self:GetParent());
-					</OnEnter>
-					<OnLeave>
-						TGUnitProcTemplate_OnLeave(self:GetParent());
-					</OnLeave>
-				</Scripts>
-			</Frame>
-		</Frames>
-		<Scripts>
-			<OnUpdate>
-				TGUnitProcTemplate_OnUpdate(self);
-			</OnUpdate>
-		</Scripts>
-	</Frame>
+    <Script file="TGUnitProcTemplate.lua"/>
+    
+    <!-- This frame is the generic text element -->
+    <Frame name="TGUnitProcTemplate" hidden="true" virtual="true">
+        <Size>
+            <AbsDimension x="16" y="16"/>
+        </Size>
+        <Frames>
+            <Frame name="$parentChild" setAllPoints="true">
+                <Frames>
+                    <Cooldown name="$parentCooldown" setAllPoints="true" hidden="true"/>
+                </Frames>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture name="$parentIcon">
+                            <Anchors>
+                                <Anchor point="TOPLEFT"/>
+                                <Anchor point="BOTTOMRIGHT"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer level="OVERLAY">
+                        <FontString name="$parentCount" setAllPoints="true" justifyH="RIGHT" justifyV="BOTTOM" inherits="NumberFontNormalSmall"/>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnEnter>
+                        TGUnitProcTemplate_OnEnter(self:GetParent());
+                    </OnEnter>
+                    <OnLeave>
+                        TGUnitProcTemplate_OnLeave(self:GetParent());
+                    </OnLeave>
+                </Scripts>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnUpdate>
+                TGUnitProcTemplate_OnUpdate(self);
+            </OnUpdate>
+        </Scripts>
+    </Frame>
 </Ui>

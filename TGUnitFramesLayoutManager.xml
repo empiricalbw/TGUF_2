@@ -1,123 +1,123 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	
-	<Button name="TGUnitFramesLayoutTemplate" virtual="true" movable="true">
-		<Size>
-			<AbsDimension x="20" y="20"/>
-		</Size>
-		<Frames>
-			<Button name="$parentHandle">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
-						<Offset><AbsDimension x="0" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Handle" setAllPoints="true"/>
-					</Layer>
-				</Layers>
-			</Button>
-			<Button name="$parentParent">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentHandle" relativePoint="TOPRIGHT">
-						<Offset><AbsDimension x="3" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Parent" setAllPoints="true"/>
-					</Layer>
-				</Layers>
-			</Button>
-			<Button name="$parentAnchor">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentParent" relativePoint="TOPRIGHT">
-						<Offset><AbsDimension x="3" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Anchor" setAllPoints="true"/>
-					</Layer>
-				</Layers>
-			</Button>
-		</Frames>
-		<Layers>
-			<Layer level="BACKGROUND">
-				<Texture name="$parentAnchorLine" file="Interface\TaxiFrame\UI-Taxi-Line"/>
-				<Texture name="$parentParentLine" file="Interface\TaxiFrame\UI-Taxi-Line"/>
-			</Layer>
-		</Layers>
-		<Scripts>
-		<OnMouseUp>
-			if ( self.isMoving ) then
-				self:StopMovingOrSizing();
-				self.isMoving = false;
-			end
-		</OnMouseUp>
-		<OnMouseDown>
-			if ( ( ( not self.isLocked ) or ( self.isLocked == 0 ) ) and ( arg1 == "LeftButton" ) ) then
-				self:StartMoving();
-				self.isMoving = true;
-			end
-		</OnMouseDown>
-		<OnHide>
-			if ( self.isMoving ) then
-				self:StopMovingOrSizing();
-				self.isMoving = false;
-			end
-		</OnHide>
-		</Scripts>
-	</Button>
-	
-	<Frame name="TGUnitFramesLayoutManagerFrame" frameStrata="FULLSCREEN" parent="UIParent" hidden="true" setAllPoints="true" enableMouse="true">
-		<Frames>
-			<Button name="$parentHandle">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="0" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Handle" setAllPoints="true"/>
-					</Layer>
-				</Layers>
-			</Button>
-		</Frames>
-		<Layers>
-			<Layer level="BACKGROUND">
-				<Texture setAllPoints="true">
-					<Color r="0" g="0" b="0" a="0.9"/>
-				</Texture>
-			</Layer>
-		</Layers>
-		<Scripts>
-			<OnLoad>
-				TGUnitFramesLayoutManagerFrame_OnLoad(self);
-				table.insert(UISpecialFrames,self:GetName());
-			</OnLoad>
-			<OnUpdate>
-				TGUnitFramesLayoutManagerFrame_OnUpdate(self);
-			</OnUpdate>
-			<OnShow>
-				PlaySound("igCharacterInfoOpen");
-			</OnShow>
-			<OnHide>
-				PlaySound("igCharacterInfoClose");
-			</OnHide>
-		</Scripts>
-	</Frame>
+    
+    <Button name="TGUnitFramesLayoutTemplate" virtual="true" movable="true">
+        <Size>
+            <AbsDimension x="20" y="20"/>
+        </Size>
+        <Frames>
+            <Button name="$parentHandle">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+                        <Offset><AbsDimension x="0" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Handle" setAllPoints="true"/>
+                    </Layer>
+                </Layers>
+            </Button>
+            <Button name="$parentParent">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentHandle" relativePoint="TOPRIGHT">
+                        <Offset><AbsDimension x="3" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Parent" setAllPoints="true"/>
+                    </Layer>
+                </Layers>
+            </Button>
+            <Button name="$parentAnchor">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentParent" relativePoint="TOPRIGHT">
+                        <Offset><AbsDimension x="3" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Anchor" setAllPoints="true"/>
+                    </Layer>
+                </Layers>
+            </Button>
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentAnchorLine" file="Interface\TaxiFrame\UI-Taxi-Line"/>
+                <Texture name="$parentParentLine" file="Interface\TaxiFrame\UI-Taxi-Line"/>
+            </Layer>
+        </Layers>
+        <Scripts>
+        <OnMouseUp>
+            if ( self.isMoving ) then
+                self:StopMovingOrSizing();
+                self.isMoving = false;
+            end
+        </OnMouseUp>
+        <OnMouseDown>
+            if ( ( ( not self.isLocked ) or ( self.isLocked == 0 ) ) and ( arg1 == "LeftButton" ) ) then
+                self:StartMoving();
+                self.isMoving = true;
+            end
+        </OnMouseDown>
+        <OnHide>
+            if ( self.isMoving ) then
+                self:StopMovingOrSizing();
+                self.isMoving = false;
+            end
+        </OnHide>
+        </Scripts>
+    </Button>
+    
+    <Frame name="TGUnitFramesLayoutManagerFrame" frameStrata="FULLSCREEN" parent="UIParent" hidden="true" setAllPoints="true" enableMouse="true">
+        <Frames>
+            <Button name="$parentHandle">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="0" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture name="$parentTexture" file="Interface\Addons\TGUF_2\Images\Handle" setAllPoints="true"/>
+                    </Layer>
+                </Layers>
+            </Button>
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture setAllPoints="true">
+                    <Color r="0" g="0" b="0" a="0.9"/>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                TGUnitFramesLayoutManagerFrame_OnLoad(self);
+                table.insert(UISpecialFrames,self:GetName());
+            </OnLoad>
+            <OnUpdate>
+                TGUnitFramesLayoutManagerFrame_OnUpdate(self);
+            </OnUpdate>
+            <OnShow>
+                PlaySound("igCharacterInfoOpen");
+            </OnShow>
+            <OnHide>
+                PlaySound("igCharacterInfoClose");
+            </OnHide>
+        </Scripts>
+    </Frame>
 </Ui>

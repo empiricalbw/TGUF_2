@@ -1,12 +1,12 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	<Script file="TGUnitClassificationTextureTemplate.lua"/>
-	
-	<!-- This frame is a generic unit element -->
-	<Frame name="TGUnitClassificationTextureTemplate" virtual="true">
-		<Layers>
-			<Layer level="ARTWORK">
-				<Texture name="$parentTexture" setAllPoints="true"/>
-			</Layer>
-		</Layers>
-	</Frame>
+    <Script file="TGUnitClassificationTextureTemplate.lua"/>
+    
+    <!-- This frame is a generic unit element -->
+    <Frame name="TGUnitClassificationTextureTemplate" virtual="true">
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture name="$parentTexture" setAllPoints="true"/>
+            </Layer>
+        </Layers>
+    </Frame>
 </Ui>

@@ -1,15 +1,15 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	<Script file="TGUnitCastIconTemplate.lua"/>
-	
-	<!-- This frame is the generic cast icon -->
-	<Frame name="TGUnitCastIconTemplate" hidden="true" virtual="true">
-		<Size>
-			<AbsDimension x="16" y="16"/>
-		</Size>
-		<Layers>
-			<Layer level="ARTWORK">
-				<Texture name="$parentIcon" setAllPoints="true"/>
-			</Layer>
-		</Layers>
-	</Frame>
+    <Script file="TGUnitCastIconTemplate.lua"/>
+    
+    <!-- This frame is the generic cast icon -->
+    <Frame name="TGUnitCastIconTemplate" hidden="true" virtual="true">
+        <Size>
+            <AbsDimension x="16" y="16"/>
+        </Size>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture name="$parentIcon" setAllPoints="true"/>
+            </Layer>
+        </Layers>
+    </Frame>
 </Ui>

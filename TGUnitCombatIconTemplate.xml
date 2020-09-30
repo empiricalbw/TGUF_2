@@ -1,17 +1,17 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	<Script file="TGUnitCombatIconTemplate.lua"/>
-	
-	<!-- This frame is the generic combat icon -->
-	<Frame name="TGUnitCombatIconTemplate" hidden="true" virtual="true">
-		<Size>
-			<AbsDimension x="16" y="16"/>
-		</Size>
-		<Layers>
-			<Layer level="ARTWORK">
-				<Texture name="$parentIcon" file="Interface\CharacterFrame\UI-StateIcon" setAllPoints="true">
-					<TexCoords left="0.5" right="1.0" top="0" bottom="0.5"/>
-				</Texture>
-			</Layer>
-		</Layers>
-	</Frame>
+    <Script file="TGUnitCombatIconTemplate.lua"/>
+    
+    <!-- This frame is the generic combat icon -->
+    <Frame name="TGUnitCombatIconTemplate" hidden="true" virtual="true">
+        <Size>
+            <AbsDimension x="16" y="16"/>
+        </Size>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture name="$parentIcon" file="Interface\CharacterFrame\UI-StateIcon" setAllPoints="true">
+                    <TexCoords left="0.5" right="1.0" top="0" bottom="0.5"/>
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
 </Ui>

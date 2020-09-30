@@ -1,1075 +1,1075 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	
-	<Button name="TGUnitFramesTemplateManagerIndexEntry" enableMouse="true" virtual="true">
-		<Size>
-			<AbsDimension x="250" y="16"/>
-		</Size>
-		<Layers>
-			<Layer level="ARTWORK">
-				<FontString name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER" setAllPoints="true"/>
-			</Layer>
-			<Layer level="BACKGROUND">
-				<Texture name="$parentHighlight2" file="Interface\QuestFrame\UI-QuestTitleHighlight" hidden="true" setAllPoints="true" alphaMode="ADD"/>
-			</Layer>
-		</Layers>
-		<Frames>
-			<Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" id="1" hidden="true">
-				<Anchors>
-					<Anchor point="TOP">
-						<Offset>
-							<AbsDimension x="-80" y="-35"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnShow>
-						UIDropDownMenu_Initialize(self,TGUnitFramesTemplateManagerIndexEntry_GetInitialize(self),"MENU");
-						UIDropDownMenu_SetButtonWidth(50);
-						UIDropDownMenu_SetWidth(self,50);
-					</OnShow>
-					<!--
-					<OnLoad>
-						UIDropDownMenu_Initialize(self,TGUnitFramesTemplateManagerIndexEntry_GetInitialize(self),"MENU");
-						UIDropDownMenu_SetButtonWidth(50);
-						UIDropDownMenu_SetWidth(50);
-					</OnLoad>
-				-->
-				</Scripts>
-			</Frame>
-		</Frames>
-		<Scripts>
-			<OnLoad>
-				self:RegisterForClicks("LeftButtonDown", "LeftButtonUp", "RightButtonUp");
-			</OnLoad>
-			<OnClick>
-				TGUnitFramesTemplateManager_OnIndexClick(self,button,self:GetID());
-			</OnClick>
-		</Scripts>
-		<HighlightTexture name="$parentHighlight" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" alphaMode="ADD"/>
-	</Button>
-	
-	<EditBox name="TGUnitFramesEditBox" enableMouse="true" autoFocus="false" virtual="true">
-		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-			<EdgeSize>
-				<AbsValue val="16"/>
-			</EdgeSize>
-			<TileSize>
-				<AbsValue val="16"/>
-			</TileSize>
-			<BackgroundInsets>
-				<AbsInset left="5" right="5" top="5" bottom="5"/>
-			</BackgroundInsets>
-		</Backdrop>
-		<TextInsets left="5" right="0" top="0" bottom="0"/>
-		<FontString inherits="ChatFontNormal"/>
-	</EditBox>
-	
-	<Button name="TGUnitFramesNudgeTemplate" inherits="UIPanelButtonTemplate" virtual="true">
-		<Size>
-			<AbsDimension x="16" y="20"/>
-		</Size>
-	</Button>
-	
-	<Frame name="TGUnitFramesAttributeTemplate" virtual="true">
-		<Size>
-			<AbsDimension x="400" y="44"/>
-		</Size>
-		<Frames>
-			<CheckButton name="$parentPresentCheck" inherits="UICheckButtonTemplate">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="LEFT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentAttributeName" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER">
-							<Size>
-								<AbsDimension x="350" y="20"/>
-							</Size>
-							<Anchors>
-								<Anchor point="LEFT" relativePoint="RIGHT">
-									<Offset><AbsDimension x="5" y="0"/></Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Scripts>
-					<OnClick>
-						TGUnitFramesAttributeTemplate_OnPresentCheckClick(self:GetParent());
-					</OnClick>
-				</Scripts>
-			</CheckButton>
-			<Frame name="$parentInteger">
-				<Size>
-					<AbsDimension x="150" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<EditBox name="$parentEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesAttributeInteger_OnEnterPressed(self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesAttributeInteger_OnEscapePressed(self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-				</Frames>
-			</Frame>
-			<Frame name="$parentString">
-				<Size>
-					<AbsDimension x="380" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<EditBox name="$parentEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesAttributeString_OnEnterPressed(self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesAttributeString_OnEscapePressed(self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-				</Frames>
-			</Frame>
-			<Frame name="$parentRestrictedValue">
-				<Size>
-					<AbsDimension x="200" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" setAllPoints="true">
-						<Scripts>
-							<OnLoad>
-								UIDropDownMenu_SetWidth(self,150);
-							</OnLoad>
-						</Scripts>
-					</Frame>
-				</Frames>
-			</Frame>
-			<Frame name="$parentMultiValue">
-				<Size>
-					<AbsDimension x="200" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" setAllPoints="true">
-						<Scripts>
-							<OnLoad>
-								UIDropDownMenu_SetWidth(self,150);
-							</OnLoad>
-						</Scripts>
-					</Frame>
-				</Frames>
-			</Frame>
-			<Frame name="$parentBoolean">
-				<Size>
-					<AbsDimension x="100" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" setAllPoints="true">
-						<Scripts>
-							<OnLoad>
-								UIDropDownMenu_SetWidth(self,75);
-							</OnLoad>
-						</Scripts>
-					</Frame>
-				</Frames>
-			</Frame>
-			<Frame name="$parentColor">
-				<Size>
-					<AbsDimension x="200" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<Button name="$parentColorSwatch">
-						<Size>
-							<AbsDimension x="16" y="16"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT"/>
-						</Anchors>
-						<Layers>
-							<Layer level="ARTWORK">
-								<Texture name="$parentTexture" setAllPoints="true">
-									<Color r="1.0" g="1.0" b="1.0" a="1.0"/>
-								</Texture>
-							</Layer>
-						</Layers>
-						<Scripts>
-							<OnClick>
-								TGUnitFramesColor_OnSwatchClick(self:GetParent():GetParent());
-							</OnClick>
-						</Scripts>
-					</Button>
-					<EditBox name="$parentRedEditBox" inherits="TGUnitFramesEditBox">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parentColorSwatch" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesColor_OnEnterPressed("Red",self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesColor_OnEscapePressed("Red",self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parentGreenEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parentRedEditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesColor_OnEnterPressed("Green",self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesColor_OnEscapePressed("Green",self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parentBlueEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parentGreenEditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesColor_OnEnterPressed("Blue",self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesColor_OnEscapePressed("Blue",self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parentAlphaEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parentBlueEditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesColor_OnEnterPressed("Alpha",self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesColor_OnEscapePressed("Alpha",self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-				</Frames>
-			</Frame>
-			<Frame name="$parentVector">
-				<Size>
-					<AbsDimension x="200" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<EditBox name="$parent1EditBox" inherits="TGUnitFramesEditBox">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parent2EditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parent1EditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parent3EditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parent2EditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parent4EditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parent3EditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-				</Frames>
-			</Frame>
-			<Frame name="$parentInsets">
-				<Size>
-					<AbsDimension x="200" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
-						<Offset><AbsDimension x="20" y="4"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<EditBox name="$parentLeftEditBox" inherits="TGUnitFramesEditBox">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsLeftEditBox","left");
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsLeftEditBox","left");
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parentTopEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parentLeftEditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsTopEditBox","top");
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsTopEditBox","top");
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parentRightEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parentTopEditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsRightEditBox","right");
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsRightEditBox","right");
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-					<EditBox name="$parentBottomEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
-						<Size>
-							<AbsDimension x="60" y="24"/>
-						</Size>
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="$parentRightEditBox" relativePoint="RIGHT"/>
-						</Anchors>
-						<Scripts>
-							<OnEnterPressed>
-								TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsBottomEditBox","bottom");
-							</OnEnterPressed>
-							<OnEscapePressed>
-								TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsBottomEditBox","bottom");
-							</OnEscapePressed>
-						</Scripts>
-					</EditBox>
-				</Frames>
-			</Frame>
-		</Frames>
-		<Scripts>
-			<OnLoad>
-				self.attributeIndex = self:GetID();
-			</OnLoad>
-		</Scripts>
-	</Frame>
-	
-	<Frame name="TGUnitFramesTemplateManagerAnchorEntry" virtual="true">
-		<Size>
-			<AbsDimension x="455" y="42"/>
-		</Size>
-		<Frames>
-			<EditBox name="$parentDYEditBox" inherits="TGUnitFramesEditBox">
-				<Size>
-					<AbsDimension x="30" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT">
-						<Offset>
-							<AbsDimension x="-7" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnEscapePressed>
-						TGUnitFramesTemplateManagerDYEditBox_OnEscapePressed(self);
-					</OnEscapePressed>
-					<OnEnterPressed>
-						TGUnitFramesTemplateManagerDYEditBox_OnEnterPressed(self);
-					</OnEnterPressed>
-				</Scripts>
-			</EditBox>
-			<EditBox name="$parentDXEditBox" inherits="TGUnitFramesEditBox">
-				<Size>
-					<AbsDimension x="30" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentDYEditBox" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="3" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnEscapePressed>
-						TGUnitFramesTemplateManagerDXEditBox_OnEscapePressed(self);
-					</OnEscapePressed>
-					<OnEnterPressed>
-						TGUnitFramesTemplateManagerDXEditBox_OnEnterPressed(self);
-					</OnEnterPressed>
-				</Scripts>
-			</EditBox>
-			<Button name="$parentNudgeRight" inherits="TGUnitFramesNudgeTemplate">
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentDXEditBox" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						self:SetText("&gt;");
-					</OnLoad>
-					<OnClick>
-						TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),1,0);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentNudgeUp" inherits="TGUnitFramesNudgeTemplate">
-				<Anchors>
-					<Anchor point="BOTTOMRIGHT" relativeTo="$parentNudgeRight" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						self:SetText("^");
-					</OnLoad>
-					<OnClick>
-						TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),0,1);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentNudgeDown" inherits="TGUnitFramesNudgeTemplate">
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parentNudgeRight" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						self:SetText("v");
-					</OnLoad>
-					<OnClick>
-						TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),0,-1);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentNudgeLeft" inherits="TGUnitFramesNudgeTemplate">
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentNudgeDown" relativePoint="TOPLEFT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						self:SetText("&lt;");
-					</OnLoad>
-					<OnClick>
-						TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),-1,0);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Frame name="$parentToAnchorDropDown" inherits="UIDropDownMenuTemplate">
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentNudgeLeft" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="7" y="-2"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						TGUnitFramesTemplateManagerToAnchorDropDown_OnLoad(self);
-					</OnLoad>
-				</Scripts>
-			</Frame>
-			<EditBox name="$parentToEditBox" inherits="TGUnitFramesEditBox">
-				<Size>
-					<AbsDimension x="30" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT"  relativeTo="$parentToAnchorDropDown" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="14" y="1"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnEscapePressed>
-						TGUnitFramesTemplateManagerToEditBox_OnEscapePressed(self);
-					</OnEscapePressed>
-					<OnEnterPressed>
-						TGUnitFramesTemplateManagerToEditBox_OnEnterPressed(self);
-					</OnEnterPressed>
-					<OnEditFocusGained>
-						TGUnitFramesTemplateManagerToEditBox_OnFocusGained(self);
-					</OnEditFocusGained>
-					<OnEditFocusLost>
-						TGUnitFramesTemplateManagerToEditBox_OnFocusLost(self);
-					</OnEditFocusLost>
-				</Scripts>
-			</EditBox>
-			<Frame name="$parentAnchorDropDown" inherits="UIDropDownMenuTemplate">
-				<Anchors>
-					<Anchor point="RIGHT"  relativeTo="$parentToEditBox" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="-10" y="-1"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						TGUnitFramesTemplateManagerAnchorDropDown_OnLoad(self);
-					</OnLoad>
-				</Scripts>
-			</Frame>
-			<CheckButton name="$parentEnabledCheck" inherits="UICheckButtonTemplate">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentAnchorDropDown" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="-5" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						TGUnitFramesTemplateManagerAnchorEnabled_OnClick(self);
-					</OnClick>
-				</Scripts>
-			</CheckButton>
-		</Frames>
-		<Layers>
-			<Layer level="BACKGROUND">
-				<FontString name="$parentMyLabel" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER" text="My:">
-					<Size>
-						<AbsDimension x="25" y="24"/>
-					</Size>
-					<Anchors>
-						<Anchor point="LEFT">
-							<Offset><AbsDimension x="20" y="0"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="$parentToLabel" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER" text="To:">
-					<Size>
-						<AbsDimension x="25" y="24"/>
-					</Size>
-					<Anchors>
-						<Anchor point="LEFT" relativeTo="$parentMyLabel" relativePoint="LEFT">
-							<Offset><AbsDimension x="150" y="0"/></Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-			</Layer>
-		</Layers>
-		<Scripts>
-			<OnLoad>
-				self.anchorIndex = self:GetID();
-			</OnLoad>
-		</Scripts>
-	</Frame>
-	
-	<Frame name="TGUnitFramesTemplateManagerFrame" parent="UIParent" hidden="true">
-		<Size>
-			<AbsDimension x="860" y="674"/>
-		</Size>
-		<Anchors>
-			<Anchor point="CENTER"/>
-		</Anchors>
-		<Frames>
-			<Frame name="$parentWorkspace">
-				<Size>
-					<AbsDimension x="380" y="380"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPRIGHT">
-						<Offset>
-							<AbsDimension x="-10" y="-10"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<Texture setAllPoints="true">
-							<Color r="0.5" g="0.5" b="0.5" a="0.9"/>
-						</Texture>
-					</Layer>
-				</Layers>
-			</Frame>
-			<Frame name="$parentCollectionDropDown" inherits="UIDropDownMenuTemplate">
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="-15" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<!--
-					<OnLoad>
-						TGUnitFramesTemplateManagerDropDown_OnLoad(self);
-					</OnLoad>
-				-->
-					<OnShow>
-						TGUnitFramesTemplateManagerCollectionDropDown_OnShow(self);
-					</OnShow>
-				</Scripts>
-			</Frame>
-			<Button name="$parentNewCollection" inherits="UIPanelButtonTemplate" text="New Collection">
-				<Size>
-					<AbsDimension x="100" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentCollectionDropDown" relativePoint="TOPRIGHT">
-						<Offset><AbsDimension x="-15" y="-1"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						TGUnitFramesTemplateManager_OnNewCollectionClick(self);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate">
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentCollectionDropDown" relativePoint="BOTTOMLEFT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<!--
-					<OnLoad>
-						TGUnitFramesTemplateManagerDropDown_OnLoad(self);
-					</OnLoad>
-				-->
-					<OnShow>
-						TGUnitFramesTemplateManagerDropDown_OnShow(self);
-					</OnShow>
-				</Scripts>
-			</Frame>
-			<Button name="$parentClone" inherits="UIPanelButtonTemplate" text="Clone">
-				<Size>
-					<AbsDimension x="100" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentDropDown" relativePoint="TOPRIGHT">
-						<Offset><AbsDimension x="-15" y="-1"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						TGUnitFramesTemplateManager_OnCloneClick(self);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentNewUnitFrame" inherits="UIPanelButtonTemplate" text="New Frame">
-				<Size>
-					<AbsDimension x="100" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parentClone" relativePoint="RIGHT">
-						<Offset><AbsDimension x="5" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						TGUnitFramesTemplateManager_OnNewFrameClick(self);
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentIndex1" id="1" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors>
-					<Anchor point="TOP" relativeTo="$parentDropDown" relativePoint="BOTTOM"/>
-					<Anchor point="RIGHT" relativeTo="$parentWorkspace" relativePoint="LEFT">
-						<Offset><AbsDimension x="-30" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentIndex2" id="2" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex1" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex3" id="3" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex2" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex4" id="4" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex3" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex5" id="5" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex4" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex6" id="6" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex5" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex7" id="7" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex6" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex8" id="8" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex7" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex9" id="9" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex8" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<Button name="$parentIndex10" id="10" inherits="TGUnitFramesTemplateManagerIndexEntry">
-				<Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex9" relativePoint="BOTTOMRIGHT"/></Anchors>
-			</Button>
-			<ScrollFrame name="$parentScrollFrame" inherits="FauxScrollFrameTemplate" enableMouse="true" hidden="true" >
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parentIndex1" relativePoint="TOPRIGHT">
-						<Offset><AbsDimension x="-4" y="0"/></Offset>
-					</Anchor>
-					<Anchor point="BOTTOMLEFT" relativeTo="$parentIndex10" relativePoint="BOTTOMRIGHT">
-						<Offset><AbsDimension x="-10" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-				<Frames>
-					<Frame name="$parentBufferFrame" enableMouse="true">
-						<Anchors>
-							<Anchor point="TOPLEFT"/>
-							<Anchor point="BOTTOMRIGHT"/>
-						</Anchors>
-					</Frame>
-				</Frames>
-				<Scripts>
-					<OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(self, offset, 16, TGUnitFramesTemplateManagerFrame_ScrollUpdate);
-					</OnVerticalScroll>
-				</Scripts>
-			</ScrollFrame>
-			<EditBox name="$parentName" inherits="TGUnitFramesEditBox">
-				<Size>
-					<AbsDimension x="130" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parentIndex1" relativePoint="TOPLEFT">
-						<Offset>
-							<AbsDimension x="-10" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" justifyH="RIGHT" justifyV="CENTER" text="Name:">
-							<Size>
-								<AbsDimension x="50" y="24"/>
-							</Size>
-							<Anchors>
-								<Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT">
-									<Offset><AbsDimension x="0" y="0"/></Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Scripts>
-					<OnEnterPressed>
-						TGUnitFramesTemplateManager_NameChange(self:GetParent());
-					</OnEnterPressed>
-					<OnEscapePressed>
-						TGUnitFramesTemplateManagerNameEditBox_OnEscapePressed(self);
-					</OnEscapePressed>
-				</Scripts>
-			</EditBox>
-			<EditBox name="$parentWidth" inherits="TGUnitFramesEditBox">
-				<Size>
-					<AbsDimension x="100" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parentName" relativePoint="BOTTOMRIGHT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" justifyH="RIGHT" justifyV="CENTER" text="Width:">
-							<Size>
-								<AbsDimension x="50" y="24"/>
-							</Size>
-							<Anchors>
-								<Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT">
-									<Offset><AbsDimension x="0" y="0"/></Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Scripts>
-					<OnEnterPressed>
-						TGUnitFramesTemplateManager_SizeChange(self:GetParent(),true,"width");
-					</OnEnterPressed>
-					<OnEscapePressed>
-						TGUnitFramesTemplateManagerSizeEditBox_OnEscapePressed(self,"width")
-					</OnEscapePressed>
-				</Scripts>
-			</EditBox>
-			<CheckButton name="$parentWidthCheck" inherits="UICheckButtonTemplate">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentWidth" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="-40" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						TGUnitFramesTemplateManagerSizeCheck_OnClick(self,"width");
-					</OnClick>
-				</Scripts>
-			</CheckButton>
-			<EditBox name="$parentHeight" inherits="TGUnitFramesEditBox">
-				<Size>
-					<AbsDimension x="100" y="24"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parentWidth" relativePoint="BOTTOMRIGHT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" justifyH="RIGHT" justifyV="CENTER" text="Height:">
-							<Size>
-								<AbsDimension x="50" y="24"/>
-							</Size>
-							<Anchors>
-								<Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT">
-									<Offset><AbsDimension x="0" y="0"/></Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Scripts>
-					<OnEnterPressed>
-						TGUnitFramesTemplateManager_SizeChange(self:GetParent(),true,"height");
-					</OnEnterPressed>
-					<OnEscapePressed>
-						TGUnitFramesTemplateManagerSizeEditBox_OnEscapePressed(self,"height")
-					</OnEscapePressed>
-				</Scripts>
-			</EditBox>
-			<CheckButton name="$parentHeightCheck" inherits="UICheckButtonTemplate">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentHeight" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="-40" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						TGUnitFramesTemplateManagerSizeCheck_OnClick(self,"height");
-					</OnClick>
-				</Scripts>
-			</CheckButton>
-			<Frame name="$parentAnchor1" id="1" inherits="TGUnitFramesTemplateManagerAnchorEntry">
-				<Anchors>
-					<Anchor point="TOP" relativeTo="$parentIndex10" relativePoint="BOTTOM">
-						<Offset><AbsDimension x="0" y="-10"/></Offset>
-					</Anchor>
-					<Anchor point="LEFT">
-						<Offset><AbsDimension x="10" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-			</Frame>
-			<Frame name="$parentAnchor2" id="2" inherits="TGUnitFramesTemplateManagerAnchorEntry">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAnchor1" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAnchor3" id="3" inherits="TGUnitFramesTemplateManagerAnchorEntry">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAnchor2" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAnchor4" id="4" inherits="TGUnitFramesTemplateManagerAnchorEntry">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAnchor3" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			
-			<Frame name="$parentAttribute6" id="6" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parentWorkspace" relativePoint="BOTTOMRIGHT">
-						<Offset><AbsDimension x="-10" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-			</Frame>
-			<Frame name="$parentAttribute7" id="7" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute6" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAttribute8" id="8" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute7" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAttribute9" id="9" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute8" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAttribute10" id="10" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute9" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			
-			<Frame name="$parentAttribute1" id="1" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentAttribute6" relativePoint="LEFT">
-						<Offset><AbsDimension x="-25" y="0"/></Offset>
-					</Anchor>
-				</Anchors>
-			</Frame>
-			<Frame name="$parentAttribute2" id="2" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute1" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAttribute3" id="3" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute2" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAttribute4" id="4" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute3" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAttribute5" id="5" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute4" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			<Frame name="$parentAttribute11" id="11" inherits="TGUnitFramesAttributeTemplate">
-				<Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute5" relativePoint="BOTTOMLEFT"/></Anchors>
-			</Frame>
-			
-		</Frames>
-		<Layers>
-			<Layer level="BACKGROUND">
-				<Texture setAllPoints="true">
-					<Color r="0" g="0" b="0" a="0.9"/>
-				</Texture>
-			</Layer>
-		</Layers>
-		<Scripts>
-			<OnLoad>
-				TGUnitFramesTemplateManagerFrame_OnLoad(self);
-				table.insert(UISpecialFrames,self:GetName());
-			</OnLoad>
-			<OnUpdate>
-				TGUnitFramesTemplateManagerFrame_OnUpdate(self);
-			</OnUpdate>
-			<OnShow>
-				--PlaySound("igCharacterInfoOpen");
-				MainMenuBar:Hide();
-			</OnShow>
-			<OnHide>
-				MainMenuBar:Show();
-				--PlaySound("igCharacterInfoClose");
-			</OnHide>
-		</Scripts>
-	</Frame>
+    
+    <Button name="TGUnitFramesTemplateManagerIndexEntry" enableMouse="true" virtual="true">
+        <Size>
+            <AbsDimension x="250" y="16"/>
+        </Size>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER" setAllPoints="true"/>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentHighlight2" file="Interface\QuestFrame\UI-QuestTitleHighlight" hidden="true" setAllPoints="true" alphaMode="ADD"/>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" id="1" hidden="true">
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="-80" y="-35"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnShow>
+                        UIDropDownMenu_Initialize(self,TGUnitFramesTemplateManagerIndexEntry_GetInitialize(self),"MENU");
+                        UIDropDownMenu_SetButtonWidth(50);
+                        UIDropDownMenu_SetWidth(self,50);
+                    </OnShow>
+                    <!--
+                    <OnLoad>
+                        UIDropDownMenu_Initialize(self,TGUnitFramesTemplateManagerIndexEntry_GetInitialize(self),"MENU");
+                        UIDropDownMenu_SetButtonWidth(50);
+                        UIDropDownMenu_SetWidth(50);
+                    </OnLoad>
+                -->
+                </Scripts>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad>
+                self:RegisterForClicks("LeftButtonDown", "LeftButtonUp", "RightButtonUp");
+            </OnLoad>
+            <OnClick>
+                TGUnitFramesTemplateManager_OnIndexClick(self,button,self:GetID());
+            </OnClick>
+        </Scripts>
+        <HighlightTexture name="$parentHighlight" file="Interface\QuestFrame\UI-QuestTitleHighlight" setAllPoints="true" alphaMode="ADD"/>
+    </Button>
+    
+    <EditBox name="TGUnitFramesEditBox" enableMouse="true" autoFocus="false" virtual="true">
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+            <BackgroundInsets>
+                <AbsInset left="5" right="5" top="5" bottom="5"/>
+            </BackgroundInsets>
+        </Backdrop>
+        <TextInsets left="5" right="0" top="0" bottom="0"/>
+        <FontString inherits="ChatFontNormal"/>
+    </EditBox>
+    
+    <Button name="TGUnitFramesNudgeTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="16" y="20"/>
+        </Size>
+    </Button>
+    
+    <Frame name="TGUnitFramesAttributeTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="400" y="44"/>
+        </Size>
+        <Frames>
+            <CheckButton name="$parentPresentCheck" inherits="UICheckButtonTemplate">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="LEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <FontString name="$parentAttributeName" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER">
+                            <Size>
+                                <AbsDimension x="350" y="20"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset><AbsDimension x="5" y="0"/></Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnClick>
+                        TGUnitFramesAttributeTemplate_OnPresentCheckClick(self:GetParent());
+                    </OnClick>
+                </Scripts>
+            </CheckButton>
+            <Frame name="$parentInteger">
+                <Size>
+                    <AbsDimension x="150" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <EditBox name="$parentEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesAttributeInteger_OnEnterPressed(self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesAttributeInteger_OnEscapePressed(self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                </Frames>
+            </Frame>
+            <Frame name="$parentString">
+                <Size>
+                    <AbsDimension x="380" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <EditBox name="$parentEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesAttributeString_OnEnterPressed(self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesAttributeString_OnEscapePressed(self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                </Frames>
+            </Frame>
+            <Frame name="$parentRestrictedValue">
+                <Size>
+                    <AbsDimension x="200" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" setAllPoints="true">
+                        <Scripts>
+                            <OnLoad>
+                                UIDropDownMenu_SetWidth(self,150);
+                            </OnLoad>
+                        </Scripts>
+                    </Frame>
+                </Frames>
+            </Frame>
+            <Frame name="$parentMultiValue">
+                <Size>
+                    <AbsDimension x="200" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" setAllPoints="true">
+                        <Scripts>
+                            <OnLoad>
+                                UIDropDownMenu_SetWidth(self,150);
+                            </OnLoad>
+                        </Scripts>
+                    </Frame>
+                </Frames>
+            </Frame>
+            <Frame name="$parentBoolean">
+                <Size>
+                    <AbsDimension x="100" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate" setAllPoints="true">
+                        <Scripts>
+                            <OnLoad>
+                                UIDropDownMenu_SetWidth(self,75);
+                            </OnLoad>
+                        </Scripts>
+                    </Frame>
+                </Frames>
+            </Frame>
+            <Frame name="$parentColor">
+                <Size>
+                    <AbsDimension x="200" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <Button name="$parentColorSwatch">
+                        <Size>
+                            <AbsDimension x="16" y="16"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT"/>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <Texture name="$parentTexture" setAllPoints="true">
+                                    <Color r="1.0" g="1.0" b="1.0" a="1.0"/>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+                                TGUnitFramesColor_OnSwatchClick(self:GetParent():GetParent());
+                            </OnClick>
+                        </Scripts>
+                    </Button>
+                    <EditBox name="$parentRedEditBox" inherits="TGUnitFramesEditBox">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentColorSwatch" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesColor_OnEnterPressed("Red",self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesColor_OnEscapePressed("Red",self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parentGreenEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentRedEditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesColor_OnEnterPressed("Green",self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesColor_OnEscapePressed("Green",self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parentBlueEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentGreenEditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesColor_OnEnterPressed("Blue",self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesColor_OnEscapePressed("Blue",self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parentAlphaEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentBlueEditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesColor_OnEnterPressed("Alpha",self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesColor_OnEscapePressed("Alpha",self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                </Frames>
+            </Frame>
+            <Frame name="$parentVector">
+                <Size>
+                    <AbsDimension x="200" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <EditBox name="$parent1EditBox" inherits="TGUnitFramesEditBox">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parent2EditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parent1EditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parent3EditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parent2EditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parent4EditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parent3EditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesVector_OnEnterPressed(self,self:GetParent():GetParent());
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesVector_OnEscapePressed(self,self:GetParent():GetParent());
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                </Frames>
+            </Frame>
+            <Frame name="$parentInsets">
+                <Size>
+                    <AbsDimension x="200" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentPresentCheck" relativePoint="BOTTOMLEFT">
+                        <Offset><AbsDimension x="20" y="4"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <EditBox name="$parentLeftEditBox" inherits="TGUnitFramesEditBox">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsLeftEditBox","left");
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsLeftEditBox","left");
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parentTopEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentLeftEditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsTopEditBox","top");
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsTopEditBox","top");
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parentRightEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentTopEditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsRightEditBox","right");
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsRightEditBox","right");
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                    <EditBox name="$parentBottomEditBox" inherits="TGUnitFramesEditBox" setAllPoints="true">
+                        <Size>
+                            <AbsDimension x="60" y="24"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="LEFT" relativeTo="$parentRightEditBox" relativePoint="RIGHT"/>
+                        </Anchors>
+                        <Scripts>
+                            <OnEnterPressed>
+                                TGUnitFramesGeneric_OnEnterPressed(self:GetParent():GetParent(),"InsetsBottomEditBox","bottom");
+                            </OnEnterPressed>
+                            <OnEscapePressed>
+                                TGUnitFramesGeneric_OnEscapePressed(self:GetParent():GetParent(),"InsetsBottomEditBox","bottom");
+                            </OnEscapePressed>
+                        </Scripts>
+                    </EditBox>
+                </Frames>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad>
+                self.attributeIndex = self:GetID();
+            </OnLoad>
+        </Scripts>
+    </Frame>
+    
+    <Frame name="TGUnitFramesTemplateManagerAnchorEntry" virtual="true">
+        <Size>
+            <AbsDimension x="455" y="42"/>
+        </Size>
+        <Frames>
+            <EditBox name="$parentDYEditBox" inherits="TGUnitFramesEditBox">
+                <Size>
+                    <AbsDimension x="30" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT">
+                        <Offset>
+                            <AbsDimension x="-7" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnEscapePressed>
+                        TGUnitFramesTemplateManagerDYEditBox_OnEscapePressed(self);
+                    </OnEscapePressed>
+                    <OnEnterPressed>
+                        TGUnitFramesTemplateManagerDYEditBox_OnEnterPressed(self);
+                    </OnEnterPressed>
+                </Scripts>
+            </EditBox>
+            <EditBox name="$parentDXEditBox" inherits="TGUnitFramesEditBox">
+                <Size>
+                    <AbsDimension x="30" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentDYEditBox" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="3" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnEscapePressed>
+                        TGUnitFramesTemplateManagerDXEditBox_OnEscapePressed(self);
+                    </OnEscapePressed>
+                    <OnEnterPressed>
+                        TGUnitFramesTemplateManagerDXEditBox_OnEnterPressed(self);
+                    </OnEnterPressed>
+                </Scripts>
+            </EditBox>
+            <Button name="$parentNudgeRight" inherits="TGUnitFramesNudgeTemplate">
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentDXEditBox" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        self:SetText("&gt;");
+                    </OnLoad>
+                    <OnClick>
+                        TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),1,0);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentNudgeUp" inherits="TGUnitFramesNudgeTemplate">
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parentNudgeRight" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        self:SetText("^");
+                    </OnLoad>
+                    <OnClick>
+                        TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),0,1);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentNudgeDown" inherits="TGUnitFramesNudgeTemplate">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentNudgeRight" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        self:SetText("v");
+                    </OnLoad>
+                    <OnClick>
+                        TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),0,-1);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentNudgeLeft" inherits="TGUnitFramesNudgeTemplate">
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentNudgeDown" relativePoint="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        self:SetText("&lt;");
+                    </OnLoad>
+                    <OnClick>
+                        TGUnitFramesTemplateManagerAnchor_Nudge(self:GetParent(),-1,0);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Frame name="$parentToAnchorDropDown" inherits="UIDropDownMenuTemplate">
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentNudgeLeft" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="7" y="-2"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        TGUnitFramesTemplateManagerToAnchorDropDown_OnLoad(self);
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+            <EditBox name="$parentToEditBox" inherits="TGUnitFramesEditBox">
+                <Size>
+                    <AbsDimension x="30" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT"  relativeTo="$parentToAnchorDropDown" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="14" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnEscapePressed>
+                        TGUnitFramesTemplateManagerToEditBox_OnEscapePressed(self);
+                    </OnEscapePressed>
+                    <OnEnterPressed>
+                        TGUnitFramesTemplateManagerToEditBox_OnEnterPressed(self);
+                    </OnEnterPressed>
+                    <OnEditFocusGained>
+                        TGUnitFramesTemplateManagerToEditBox_OnFocusGained(self);
+                    </OnEditFocusGained>
+                    <OnEditFocusLost>
+                        TGUnitFramesTemplateManagerToEditBox_OnFocusLost(self);
+                    </OnEditFocusLost>
+                </Scripts>
+            </EditBox>
+            <Frame name="$parentAnchorDropDown" inherits="UIDropDownMenuTemplate">
+                <Anchors>
+                    <Anchor point="RIGHT"  relativeTo="$parentToEditBox" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-10" y="-1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        TGUnitFramesTemplateManagerAnchorDropDown_OnLoad(self);
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+            <CheckButton name="$parentEnabledCheck" inherits="UICheckButtonTemplate">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentAnchorDropDown" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-5" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        TGUnitFramesTemplateManagerAnchorEnabled_OnClick(self);
+                    </OnClick>
+                </Scripts>
+            </CheckButton>
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <FontString name="$parentMyLabel" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER" text="My:">
+                    <Size>
+                        <AbsDimension x="25" y="24"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset><AbsDimension x="20" y="0"/></Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parentToLabel" inherits="GameFontNormalSmall" justifyH="LEFT" justifyV="CENTER" text="To:">
+                    <Size>
+                        <AbsDimension x="25" y="24"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parentMyLabel" relativePoint="LEFT">
+                            <Offset><AbsDimension x="150" y="0"/></Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                self.anchorIndex = self:GetID();
+            </OnLoad>
+        </Scripts>
+    </Frame>
+    
+    <Frame name="TGUnitFramesTemplateManagerFrame" parent="UIParent" hidden="true">
+        <Size>
+            <AbsDimension x="860" y="674"/>
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Frames>
+            <Frame name="$parentWorkspace">
+                <Size>
+                    <AbsDimension x="380" y="380"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-10" y="-10"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture setAllPoints="true">
+                            <Color r="0.5" g="0.5" b="0.5" a="0.9"/>
+                        </Texture>
+                    </Layer>
+                </Layers>
+            </Frame>
+            <Frame name="$parentCollectionDropDown" inherits="UIDropDownMenuTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="-15" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <!--
+                    <OnLoad>
+                        TGUnitFramesTemplateManagerDropDown_OnLoad(self);
+                    </OnLoad>
+                -->
+                    <OnShow>
+                        TGUnitFramesTemplateManagerCollectionDropDown_OnShow(self);
+                    </OnShow>
+                </Scripts>
+            </Frame>
+            <Button name="$parentNewCollection" inherits="UIPanelButtonTemplate" text="New Collection">
+                <Size>
+                    <AbsDimension x="100" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentCollectionDropDown" relativePoint="TOPRIGHT">
+                        <Offset><AbsDimension x="-15" y="-1"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        TGUnitFramesTemplateManager_OnNewCollectionClick(self);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Frame name="$parentDropDown" inherits="UIDropDownMenuTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentCollectionDropDown" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <!--
+                    <OnLoad>
+                        TGUnitFramesTemplateManagerDropDown_OnLoad(self);
+                    </OnLoad>
+                -->
+                    <OnShow>
+                        TGUnitFramesTemplateManagerDropDown_OnShow(self);
+                    </OnShow>
+                </Scripts>
+            </Frame>
+            <Button name="$parentClone" inherits="UIPanelButtonTemplate" text="Clone">
+                <Size>
+                    <AbsDimension x="100" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentDropDown" relativePoint="TOPRIGHT">
+                        <Offset><AbsDimension x="-15" y="-1"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        TGUnitFramesTemplateManager_OnCloneClick(self);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentNewUnitFrame" inherits="UIPanelButtonTemplate" text="New Frame">
+                <Size>
+                    <AbsDimension x="100" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentClone" relativePoint="RIGHT">
+                        <Offset><AbsDimension x="5" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        TGUnitFramesTemplateManager_OnNewFrameClick(self);
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentIndex1" id="1" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors>
+                    <Anchor point="TOP" relativeTo="$parentDropDown" relativePoint="BOTTOM"/>
+                    <Anchor point="RIGHT" relativeTo="$parentWorkspace" relativePoint="LEFT">
+                        <Offset><AbsDimension x="-30" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="$parentIndex2" id="2" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex1" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex3" id="3" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex2" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex4" id="4" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex3" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex5" id="5" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex4" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex6" id="6" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex5" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex7" id="7" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex6" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex8" id="8" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex7" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex9" id="9" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex8" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <Button name="$parentIndex10" id="10" inherits="TGUnitFramesTemplateManagerIndexEntry">
+                <Anchors><Anchor point="TOPRIGHT" relativeTo="$parentIndex9" relativePoint="BOTTOMRIGHT"/></Anchors>
+            </Button>
+            <ScrollFrame name="$parentScrollFrame" inherits="FauxScrollFrameTemplate" enableMouse="true" hidden="true" >
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentIndex1" relativePoint="TOPRIGHT">
+                        <Offset><AbsDimension x="-4" y="0"/></Offset>
+                    </Anchor>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parentIndex10" relativePoint="BOTTOMRIGHT">
+                        <Offset><AbsDimension x="-10" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+                <Frames>
+                    <Frame name="$parentBufferFrame" enableMouse="true">
+                        <Anchors>
+                            <Anchor point="TOPLEFT"/>
+                            <Anchor point="BOTTOMRIGHT"/>
+                        </Anchors>
+                    </Frame>
+                </Frames>
+                <Scripts>
+                    <OnVerticalScroll>
+                        FauxScrollFrame_OnVerticalScroll(self, offset, 16, TGUnitFramesTemplateManagerFrame_ScrollUpdate);
+                    </OnVerticalScroll>
+                </Scripts>
+            </ScrollFrame>
+            <EditBox name="$parentName" inherits="TGUnitFramesEditBox">
+                <Size>
+                    <AbsDimension x="130" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentIndex1" relativePoint="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="-10" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <FontString name="$parentLabel" inherits="GameFontNormalSmall" justifyH="RIGHT" justifyV="CENTER" text="Name:">
+                            <Size>
+                                <AbsDimension x="50" y="24"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT">
+                                    <Offset><AbsDimension x="0" y="0"/></Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnEnterPressed>
+                        TGUnitFramesTemplateManager_NameChange(self:GetParent());
+                    </OnEnterPressed>
+                    <OnEscapePressed>
+                        TGUnitFramesTemplateManagerNameEditBox_OnEscapePressed(self);
+                    </OnEscapePressed>
+                </Scripts>
+            </EditBox>
+            <EditBox name="$parentWidth" inherits="TGUnitFramesEditBox">
+                <Size>
+                    <AbsDimension x="100" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentName" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <FontString name="$parentLabel" inherits="GameFontNormalSmall" justifyH="RIGHT" justifyV="CENTER" text="Width:">
+                            <Size>
+                                <AbsDimension x="50" y="24"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT">
+                                    <Offset><AbsDimension x="0" y="0"/></Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnEnterPressed>
+                        TGUnitFramesTemplateManager_SizeChange(self:GetParent(),true,"width");
+                    </OnEnterPressed>
+                    <OnEscapePressed>
+                        TGUnitFramesTemplateManagerSizeEditBox_OnEscapePressed(self,"width")
+                    </OnEscapePressed>
+                </Scripts>
+            </EditBox>
+            <CheckButton name="$parentWidthCheck" inherits="UICheckButtonTemplate">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentWidth" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-40" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        TGUnitFramesTemplateManagerSizeCheck_OnClick(self,"width");
+                    </OnClick>
+                </Scripts>
+            </CheckButton>
+            <EditBox name="$parentHeight" inherits="TGUnitFramesEditBox">
+                <Size>
+                    <AbsDimension x="100" y="24"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentWidth" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <FontString name="$parentLabel" inherits="GameFontNormalSmall" justifyH="RIGHT" justifyV="CENTER" text="Height:">
+                            <Size>
+                                <AbsDimension x="50" y="24"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT">
+                                    <Offset><AbsDimension x="0" y="0"/></Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnEnterPressed>
+                        TGUnitFramesTemplateManager_SizeChange(self:GetParent(),true,"height");
+                    </OnEnterPressed>
+                    <OnEscapePressed>
+                        TGUnitFramesTemplateManagerSizeEditBox_OnEscapePressed(self,"height")
+                    </OnEscapePressed>
+                </Scripts>
+            </EditBox>
+            <CheckButton name="$parentHeightCheck" inherits="UICheckButtonTemplate">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentHeight" relativePoint="LEFT">
+                        <Offset>
+                            <AbsDimension x="-40" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        TGUnitFramesTemplateManagerSizeCheck_OnClick(self,"height");
+                    </OnClick>
+                </Scripts>
+            </CheckButton>
+            <Frame name="$parentAnchor1" id="1" inherits="TGUnitFramesTemplateManagerAnchorEntry">
+                <Anchors>
+                    <Anchor point="TOP" relativeTo="$parentIndex10" relativePoint="BOTTOM">
+                        <Offset><AbsDimension x="0" y="-10"/></Offset>
+                    </Anchor>
+                    <Anchor point="LEFT">
+                        <Offset><AbsDimension x="10" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+            </Frame>
+            <Frame name="$parentAnchor2" id="2" inherits="TGUnitFramesTemplateManagerAnchorEntry">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAnchor1" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAnchor3" id="3" inherits="TGUnitFramesTemplateManagerAnchorEntry">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAnchor2" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAnchor4" id="4" inherits="TGUnitFramesTemplateManagerAnchorEntry">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAnchor3" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            
+            <Frame name="$parentAttribute6" id="6" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentWorkspace" relativePoint="BOTTOMRIGHT">
+                        <Offset><AbsDimension x="-10" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+            </Frame>
+            <Frame name="$parentAttribute7" id="7" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute6" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAttribute8" id="8" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute7" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAttribute9" id="9" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute8" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAttribute10" id="10" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute9" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            
+            <Frame name="$parentAttribute1" id="1" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentAttribute6" relativePoint="LEFT">
+                        <Offset><AbsDimension x="-25" y="0"/></Offset>
+                    </Anchor>
+                </Anchors>
+            </Frame>
+            <Frame name="$parentAttribute2" id="2" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute1" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAttribute3" id="3" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute2" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAttribute4" id="4" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute3" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAttribute5" id="5" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute4" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            <Frame name="$parentAttribute11" id="11" inherits="TGUnitFramesAttributeTemplate">
+                <Anchors><Anchor point="TOPLEFT" relativeTo="$parentAttribute5" relativePoint="BOTTOMLEFT"/></Anchors>
+            </Frame>
+            
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture setAllPoints="true">
+                    <Color r="0" g="0" b="0" a="0.9"/>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                TGUnitFramesTemplateManagerFrame_OnLoad(self);
+                table.insert(UISpecialFrames,self:GetName());
+            </OnLoad>
+            <OnUpdate>
+                TGUnitFramesTemplateManagerFrame_OnUpdate(self);
+            </OnUpdate>
+            <OnShow>
+                --PlaySound("igCharacterInfoOpen");
+                MainMenuBar:Hide();
+            </OnShow>
+            <OnHide>
+                MainMenuBar:Show();
+                --PlaySound("igCharacterInfoClose");
+            </OnHide>
+        </Scripts>
+    </Frame>
 </Ui>
