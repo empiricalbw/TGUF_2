@@ -28,7 +28,7 @@ local TGUF_DEBUG_STUPID_TEMPLATE =
 	}
 }
 
-local	TGUF_DEBUG_FRAME_TEMPLATE =
+local TGUF_DEBUG_FRAME_TEMPLATE =
 {
 	-- Unit frame
 	type = "TGUnitFrame",
@@ -275,51 +275,6 @@ local	TGUF_DEBUG_FRAME_TEMPLATE =
 	}
 }
 
---[[
-local TGUF_DEBUG_STUPID_PARTY_LAYOUT =
-{
-	filters =
-	{
-		"player",
-	},
-	frames =
-	{
-		{	-- Player unit
-			--type = "TGUnitDebug",
-			collection = "Built-in",
-			type = "TGUnitDebug",
-			unit = "player",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=20,dY=-20}},
-			dependents =
-			{
-				{	-- Player pet
-					collection = "Built-in",
-					type = "TGUnitDebug",
-					unit = "pet",
-					hideInRaid = false,
-					anchors = {
-						{myPoint="LEFT",anchor=0,anchorPoint="RIGHT",dX=7,dY=7}},
-					dependents =
-					{
-						{	-- Player pet target
-							collection = "Built-in",
-							type = "TGUnitDebug",
-							unit = "pettarget",
-							hideInRaid = false,
-							anchors = {
-								{myPoint="LEFT",anchor=0,anchorPoint="RIGHT",dX=7,dY=0}}
-						}
-					}
-				}
-			}
-		},
-	}
-}
-TGUnitFrames_RegisterLayout(TGUF_DEBUG_STUPID_PARTY_LAYOUT,"TGUnitDebugStupidPartyLayout");
-]]
-
 local TGUF_DEBUG_PARTY_LAYOUT =
 {
 	filters =
@@ -330,7 +285,6 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 	frames =
 	{
 		{	-- Player unit
-			--type = "TGUnitDebug",
 			collection = "DUF",
 			type = "DUF_PlayerSmallModel",
 			unit = "player",
@@ -361,9 +315,7 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 			}
 		},
 		{	-- Party1 unit
-			--type = "TGUnitDebug",
 			collection = "DUF",
-			--type = "DUF_Party",
 			type = "DUF_PartySmallModelNoCast",
 			unit = "party1",
 			hideInRaid = true,
@@ -382,9 +334,7 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 			}
 		},
 		{	-- Party2 unit
-			--type = "TGUnitDebug",
 			collection = "DUF",
-			--type = "DUF_Party",
 			type = "DUF_PartySmallModelNoCast",
 			unit = "party2",
 			hideInRaid = true,
@@ -403,9 +353,7 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 			}
 		},
 		{	-- Party3 unit
-			--type = "TGUnitDebug",
 			collection = "DUF",
-			--type = "DUF_Party",
 			type = "DUF_PartySmallModelNoCast",
 			unit = "party3",
 			hideInRaid = true,
@@ -424,9 +372,7 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 			}
 		},
 		{	-- Party4 unit
-			--type = "TGUnitDebug",
 			collection = "DUF",
-			--type = "DUF_Party",
 			type = "DUF_PartySmallModelNoCast",
 			unit = "party4",
 			hideInRaid = true,
@@ -447,135 +393,6 @@ local TGUF_DEBUG_PARTY_LAYOUT =
 	}
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_PARTY_LAYOUT,"TGUnitDebugPartyLayout");
-
---[[
-local TGUF_DEBUG_PARTY_LAYOUT_MODERN =
-{
-	filters =
-	{
-		"player",
-		"party"
-	},
-	frames =
-	{
-		{	-- Player unit
-			collection = "Modern",
-			type = "Player",
-			unit = "player",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=550,dY=-670}},
-			dependents =
-			{
-				{	-- Player pet
-					collection = "Modern",
-					type = "PlayerPet",
-					unit = "pet",
-					hideInRaid = false,
-					anchors = {
-						{myPoint="TOPLEFT",anchor=0,anchorPoint="BOTTOMLEFT",dX=0,dY=-13}},
-					dependents =
-					{
-						{	-- Player pet target
-							collection = "Modern",
-							type = "PlayerPetTarget",
-							unit = "pettarget",
-							hideInRaid = false,
-							anchors = {
-								{myPoint="LEFT",anchor=0,anchorPoint="RIGHT",dX=7,dY=0}}
-						}
-					}
-				}
-			}
-		},
-		{	-- Party1 unit
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
-			unit = "party1",
-			hideInRaid = true,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=-1,anchorPoint="BOTTOMLEFT",dX=0,dY=-34}},
-			dependents =
-			{
-				{	-- Party1 pet
-					collection = "DUF",
-					type = "DUF_Pet",
-					unit = "partypet1",
-					hideInRaid = true,
-					anchors = {
-						{myPoint="LEFT",anchor=0,anchorPoint="RIGHT",dX=7,dY=0}}
-				}
-			}
-		},
-		{	-- Party2 unit
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
-			unit = "party2",
-			hideInRaid = true,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=-1,anchorPoint="BOTTOMLEFT",dX=0,dY=-42}},
-			dependents =
-			{
-				{	-- Party2 pet
-					collection = "DUF",
-					type = "DUF_Pet",
-					unit = "partypet2",
-					hideInRaid = true,
-					anchors = {
-						{myPoint="LEFT",anchor=0,anchorPoint="RIGHT",dX=7,dY=0}}
-				}
-			}
-		},
-		{	-- Party3 unit
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
-			unit = "party3",
-			hideInRaid = true,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=-1,anchorPoint="BOTTOMLEFT",dX=0,dY=-42}},
-			dependents =
-			{
-				{	-- Party3 pet
-					collection = "DUF",
-					type = "DUF_Pet",
-					unit = "partypet3",
-					hideInRaid = true,
-					anchors = {
-						{myPoint="LEFT",anchor=0,anchorPoint="RIGHT",dX=7,dY=0}}
-				}
-			}
-		},
-		{	-- Party4 unit
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			--type = "DUF_Party",
-			type = "DUF_PartySmallModel",
-			unit = "party4",
-			hideInRaid = true,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=-1,anchorPoint="BOTTOMLEFT",dX=0,dY=-42}},
-			dependents =
-			{
-				{	-- Party4 pet
-					collection = "DUF",
-					type = "DUF_Pet",
-					unit = "partypet4",
-					hideInRaid = true,
-					anchors = {
-						{myPoint="LEFT",anchor=0,anchorPoint="RIGHT",dX=7,dY=0}}
-				}
-			}
-		}
-	}
-}
-TGUnitFrames_RegisterLayout(TGUF_DEBUG_PARTY_LAYOUT_MODERN,"TGUnitDebugPartyLayoutModern");
-]]
 
 local TGUF_DEBUG_RAID_LAYOUT =
 {
@@ -686,123 +503,6 @@ local TGUF_DEBUG_TARGET_LAYOUT =
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_TARGET_LAYOUT,"TGUnitDebugTargetLayout");
 
---[[
-local TGUF_DEBUG_TARGET_LAYOUT_MODERN =
-{
-	filters =
-	{
-		"target"
-	},
-	frames =
-	{
-		{	-- Target
-			collection = "Modern",
-			type = "Target",
-			unit = "target",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=550,dY=-580}}
-		},
-		{	-- Targettarget
-			collection = "Modern",
-			type = "Target",
-			unit = "targettarget",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
-		},
-		{	-- Targettargettarget
-			collection = "Modern",
-			type = "Target",
-			unit = "targettargettarget",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
-		}
-	}
-}
-TGUnitFrames_RegisterLayout(TGUF_DEBUG_TARGET_LAYOUT_MODERN,"TGUnitDebugTargetLayoutModern");
-]]
-
---[[
-local TGUF_DEBUG_FOCUS_LAYOUT =
-{
-	filters =
-	{
-		"focus"
-	},
-	frames =
-	{
-		{	-- Target
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			type = "DUF_Generic",
-			unit = "focus",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=550,dY=-620}}
-		},
-		{	-- Targettarget
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			type = "DUF_Generic",
-			unit = "focustarget",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
-		},
-		{	-- Targettargettarget
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			type = "DUF_Generic",
-			unit = "focustargettarget",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
-		}
-	}
-}
-TGUnitFrames_RegisterLayout(TGUF_DEBUG_FOCUS_LAYOUT,"TGUnitDebugFocusLayout");
-]]
-
---[[
-local TGUF_DEBUG_FOCUS_LAYOUT_MODERN =
-{
-	filters =
-	{
-		"focus"
-	},
-	frames =
-	{
-		{	-- Target
-			collection = "Modern",
-			type = "Target",
-			unit = "focus",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=717,dY=-670}}
-		},
-		{	-- Targettarget
-			collection = "Modern",
-			type = "Target",
-			unit = "focustarget",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
-		},
-		{	-- Targettargettarget
-			collection = "Modern",
-			type = "Target",
-			unit = "focustargettarget",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
-		}
-	}
-}
-TGUnitFrames_RegisterLayout(TGUF_DEBUG_FOCUS_LAYOUT_MODERN,"TGUnitDebugFocusLayoutModern");
-]]
-
 function TGUnitDebug_AllocateFocusFrames()
 	TGUF_DEBUG_FRAME_TEMPLATE.highlightIfTargetted = true;
 	local	f1 = TGUnitFrames_AllocateUnitFrameTemplate("focus","TGUnitDebug",UIParent,{{myPoint="LEFT",anchorPoint="LEFT",dX=0,dY=0}},{UIParent});
@@ -816,28 +516,6 @@ function TGUnitDebug_AllocateTargetFrames()
 	TGUF_DEBUG_FRAME_TEMPLATE.highlightIfTargetted = false;
 	local	f3 = TGUnitFrames_AllocateUnitFrameTemplate("target","TGUnitDebug",UIParent,{{myPoint="RIGHT",anchorPoint="LEFT",dX=-2,dY=0}},{f2});
 end
-
---[[
-local TGUF_DEBUG_AUTOFIND_LAYOUT =
-{
-	filters =
-	{
-	},
-	frames =
-	{
-		{	-- AutoFind
-			--type = "TGUnitDebug",
-			collection = "DUF",
-			type = "DUF_Generic",
-			unit = "autotarget",
-			hideInRaid = false,
-			anchors = {
-				{myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=550,dY=-880}}
-		},
-	}
-}
-TGUnitFrames_RegisterLayout(TGUF_DEBUG_AUTOFIND_LAYOUT,"TGUnitDebugAutoFindLayout");
-]]
 
 local TGUF_DEBUG_CASTBAR_LAYOUT =
 {
@@ -866,17 +544,8 @@ function TGUnitFramesDebuggingComponent_OnPlayerEnteringWorld()
 		TGUnitFrames_RegisterUnitFrameTemplate(TGUF_DEBUG_FRAME_TEMPLATE,"TGUnitDebug",true);
 		TGUnitFrames_RegisterUnitFrameTemplate(TGUF_DEBUG_STUPID_TEMPLATE,"TGUnitStupid",true);
 
-		--[[
-		TGUnitFrames_AllocateLayout("TGUnitDebugPartyLayoutModern");
-		TGUnitFrames_AllocateLayout("TGUnitDebugTargetLayoutModern");
-		TGUnitFrames_AllocateLayout("TGUnitDebugFocusLayoutModern");
-		]]
-		--TGUnitFrames_AllocateLayout("TGUnitDebugStupidPartyLayout");
 		TGUnitFrames_AllocateLayout("TGUnitDebugPartyLayout");
 		TGUnitFrames_AllocateLayout("TGUnitDebugTargetLayout");
-		--TGUnitFrames_AllocateLayout("TGUnitDebugFocusLayout");
-		--TGUnitFrames_AllocateLayout("TGUnitDebugPlayerCastBarLayout");
-		--TGUnitFrames_AllocateLayout("TGUnitDebugAutoFindLayout")
 
 		local raidFrames = TGUnitFrames_AllocateLayout("TGUnitDebugRaidLayout");
 		TGRaidSorter_SetRaidFrames(raidFrames);
