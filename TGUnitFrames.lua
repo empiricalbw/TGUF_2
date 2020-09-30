@@ -7,21 +7,12 @@ local TGUF_EVENT_DISPATCH_TABLE = {
     ["PLAYER_ENTERING_WORLD"] = "onPlayerEnteringWorld",
     ["CVAR_UPDATE"] = "onCVARUpdate",
     ["UNIT_MANA"] = "onUnitPowerChange",
-    --["UNIT_RAGE"] = "onUnitPowerChange",
-    --["UNIT_FOCUS"] = "onUnitPowerChange",
-    --["UNIT_ENERGY"] = "onUnitPowerChange",
     ["UNIT_HAPPINESS"] = "onUnitPowerChange",
-    --["UNIT_MAXMANA"] = "onUnitMaxPowerChange",
-    --["UNIT_MAXRAGE"] = "onUnitMaxPowerChange",
-    --["UNIT_MAXFOCUS"] = "onUnitMaxPowerChange",
-    --["UNIT_MAXENERGY"] = "onUnitMaxPowerChange",
-    --["UNIT_MAXHAPPINESS"] = "onUnitMaxPowerChange",
     ["UNIT_DISPLAYPOWER"] = "onUnitPowerTypeChange",
     ["UNIT_HEALTH"] = "onUnitHealthChange",
     ["UNIT_MAXHEALTH"] = "onUnitMaxHealthChange",
     ["UNIT_LEVEL"] = "onUnitLevelChange",
     ["PLAYER_TARGET_CHANGED"] = "onPlayerTargetChange",
-    --["PLAYER_FOCUS_CHANGED"] = "onPlayerFocusChange",
     ["UNIT_SPELLCAST_START"] = "onSpellcastStart",
     ["UNIT_SPELLCAST_DELAYED"] = "onSpellcastDelayed",
     ["UNIT_SPELLCAST_STOP"] = "onSpellcastStop",
@@ -30,7 +21,6 @@ local TGUF_EVENT_DISPATCH_TABLE = {
     ["UNIT_SPELLCAST_CHANNEL_START"] = "onSpellcastChannelStart",
     ["UNIT_SPELLCAST_CHANNEL_UPDATE"] = "onSpellcastChannelUpdate",
     ["UNIT_SPELLCAST_CHANNEL_STOP"] = "onSpellcastChannelStop",
-    --["UNIT_SPELLMISS"] = "onSpellcastMiss",
     ["UNIT_SPELLCAST_SUCCEEDED"] = "onSpellcastSucceeded",
     ["UNIT_SPELLCAST_SENT"] = "onSpellcastSent",
     ["UNIT_PET"] = "onUnitPet",
@@ -41,9 +31,7 @@ local TGUF_EVENT_DISPATCH_TABLE = {
     ["PLAYER_REGEN_DISABLED"] = "onPlayerRegenDisabled",
     ["PLAYER_REGEN_ENABLED"] = "onPlayerRegenEnabled",
     ["UNIT_MODEL_CHANGED"] = "onUnitModelChange",
-    --["PLAYER_COMBO_POINTS"] = "onComboPointsChange",
     ["UNIT_NAME_UPDATE"] = "onUnitNameChange",
-    --["CHAT_MSG_SPELL_SELF_DAMAGE"] = "onChatMsgSpellSelfDamage"
     };
     
 function TGUnitFrames_RegisterComponent(component)
@@ -158,13 +146,9 @@ function TGUnitFrames_SetAttributes(frame,anchors,size,anchorFrames)
     if (size ~= nil) then
         if (size.width ~= nil) then
             frame:SetWidth(size.width);
-        else
-            --frame:SetWidth(nil);
         end
         if (size.height ~= nil) then
             frame:SetHeight(size.height);
-        else
-            --frame:SetHeight(nil);
         end
     end
 end
@@ -190,22 +174,6 @@ function TGUFMsg(str)
     if (TGUF_DEBUG_FRAME ~= DEFAULT_CHAT_FRAME) then
         DEFAULT_CHAT_FRAME:AddMessage(finalStr);
     end
-end
-
-function TGUFErrorWithStack(msg)
-    local   errormsg = msg;
-    
---  if (string.find(msg,"TGUnitFrames")) then
-        local   backstack = debugstack(2);
-        errormsg = msg.."\n\n\n\n\n"..backstack;
---  end
-    
-    DEFAULT_CHAT_FRAME:AddMessage(errormsg);
-    _ERRORMESSAGE(errormsg)
-end
--- Set up error handling
-if false then
-    seterrorhandler(TGUFErrorWithStack);
 end
 
 function TGUFFindDebugFrame()
