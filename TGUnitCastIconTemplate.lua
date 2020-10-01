@@ -34,7 +34,10 @@ function TGUnitCastIcon_SpellUnitUpdate(unit,frame)
         frame:Show();
     else
         if (frame.backgroundColor) then
-            barIcon:SetTexture(frame.backgroundColor.r,frame.backgroundColor.g,frame.backgroundColor.b,frame.backgroundColor.a);
+            barIcon:SetColorTexture(frame.backgroundColor.r,
+                                    frame.backgroundColor.g,
+                                    frame.backgroundColor.b,
+                                    frame.backgroundColor.a)
         else
             frame:Hide();
         end

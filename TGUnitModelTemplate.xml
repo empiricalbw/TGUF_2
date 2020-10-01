@@ -11,7 +11,7 @@
         </Frames>
         <Layers>
             <Layer level="BACKGROUND">
-                <Texture name = "$parentBackground" setAllPoints="true">
+                <Texture name="$parentBackground" setAllPoints="true">
                     <Color r="0" g="0" b="0" a="0.5"/>
                 </Texture>
             </Layer>

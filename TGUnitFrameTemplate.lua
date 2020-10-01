@@ -43,7 +43,10 @@ function TGUnitFrame_NewTGUnitFrame(frame,parentFrame,attributes)
     
     -- Display as necessary
     local   backgroundTexture = _G[frame:GetName().."Background"];
-    backgroundTexture:SetTexture(frame.backgroundColor.r,frame.backgroundColor.g,frame.backgroundColor.b,frame.backgroundColor.a);
+    backgroundTexture:SetColorTexture(frame.backgroundColor.r,
+                                      frame.backgroundColor.g,
+                                      frame.backgroundColor.b,
+                                      frame.backgroundColor.a)
     
     -- Done.
     return frame;

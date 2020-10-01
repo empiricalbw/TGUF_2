@@ -220,13 +220,13 @@ function TGUnitModel_LevelAggroNPCUpdate(unit,frame)
             -- Enemy PC's and NPC's get a con background
             local   levelDiff = unit.level - UnitLevel("player");
     
-            if ( levelDiff >= 5 ) then
+            if (levelDiff >= 5) then
                 color = frame.impossibleColor;
-            elseif ( levelDiff >= 3 ) then
+            elseif (levelDiff >= 3) then
                 color = frame.veryDifficultColor;
-            elseif ( levelDiff >= -2 ) then
+            elseif (levelDiff >= 2) then
                 color = frame.difficultColor;
-            elseif ( -levelDiff <= GetQuestGreenRange() ) then
+            elseif (-levelDiff <= GetQuestGreenRange()) then
                 color = frame.standardColor;
             else
                 color = frame.trivialColor;
@@ -238,7 +238,7 @@ function TGUnitModel_LevelAggroNPCUpdate(unit,frame)
     else
         color = frame.backgroundColor;
     end
-    backgroundTexture:SetTexture(color.r,color.g,color.b,color.a);
+    backgroundTexture:SetColorTexture(color.r,color.g,color.b,color.a);
 end
 
 local TGUnitModelTemplate_ObjectInfo =

@@ -25,7 +25,8 @@ function TGUnitTexture_NewTGUnitTexture(frame,parentFrame,attributes)
     else
         frame:SetBackdrop(nil);
         if (frame.bgColor ~= nil) then
-            backgroundTexture:SetTexture(frame.bgColor.r,frame.bgColor.g,frame.bgColor.b,frame.bgColor.a);
+            backgroundTexture:SetColorTexture(frame.bgColor.r,frame.bgColor.g,
+                                              frame.bgColor.b,frame.bgColor.a)
             backgroundTexture:Show();
         else
             backgroundTexture:Hide();
@@ -39,7 +40,8 @@ function TGUnitTexture_NewTGUnitTexture(frame,parentFrame,attributes)
         end
         texture:Show();
     elseif (frame.textureColor ~= nil) then
-        texture:SetTexture(frame.textureColor.r,frame.textureColor.g,frame.textureColor.b,frame.textureColor.a);
+        texture:SetColorTexture(frame.textureColor.r,frame.textureColor.g,
+                                frame.textureColor.b,frame.textureColor.a)
         texture:Show();
     else
         texture:Hide();
