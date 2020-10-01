@@ -9,13 +9,13 @@ local TGUF_CAMERA_TO_INDEX_TABLE = {
     
 function TGUnitModel_NewTGUnitModel(frame,parentFrame,attributes)
     -- Set the unit info
-    frame.unitChanged = TGUnitModel_UnitChanged;
-    frame.backgroundColor = attributes.backgroundColor;
-    frame.impossibleColor = attributes.impossibleColor;
+    frame.unitChanged        = TGUnitModel_UnitChanged;
+    frame.backgroundColor    = attributes.backgroundColor;
+    frame.impossibleColor    = attributes.impossibleColor;
     frame.veryDifficultColor = attributes.veryDifficultColor;
-    frame.difficultColor = attributes.difficultColor;
-    frame.standardColor = attributes.standardColor;
-    frame.trivialColor = attributes.trivialColor;
+    frame.difficultColor     = attributes.difficultColor;
+    frame.standardColor      = attributes.standardColor;
+    frame.trivialColor       = attributes.trivialColor;
     --[[
     frame.modelScale = attributes.modelPercent/100.0;
     frame.modelPosition = attributes.modelPosition;
@@ -39,13 +39,13 @@ function TGUnitModel_NewTGUnitModel(frame,parentFrame,attributes)
         frame.cameraIndex = 0;
     end
     ]]
-    frame.existsUnitUpdate = TGUnitModel_ModelUpdate; --TGUnitModel_ExistsUnitUpdate;
-    frame.modelUnitUpdate = TGUnitModel_ModelUpdate;
-    frame.levelUnitUpdate = TGUnitModel_LevelAggroNPCUpdate;
+    frame.existsUnitUpdate   = TGUnitModel_ModelUpdate; --TGUnitModel_ExistsUnitUpdate;
+    frame.modelUnitUpdate    = TGUnitModel_ModelUpdate;
+    frame.levelUnitUpdate    = TGUnitModel_LevelAggroNPCUpdate;
     frame.reactionUnitUpdate = TGUnitModel_LevelAggroNPCUpdate;
-    frame.npcUnitUpdate = TGUnitModel_LevelAggroNPCUpdate;
-    frame.nameUnitUpdate = TGUnitModel_ModelUpdate;
-    frame.livingUnitUpdate = TGUnitModel_LivingUpdate;
+    frame.npcUnitUpdate      = TGUnitModel_LevelAggroNPCUpdate;
+    frame.nameUnitUpdate     = TGUnitModel_ModelUpdate;
+    frame.livingUnitUpdate   = TGUnitModel_LivingUpdate;
     table.insert(frame.listener.exists,frame);
     table.insert(frame.listener.model,frame);
     table.insert(frame.listener.level,frame);
@@ -209,36 +209,36 @@ function TGUnitModel_LivingUpdate(unit,frame)
 end
 
 function TGUnitModel_LevelAggroNPCUpdate(unit,frame)
+    if (not unit.exists) then
+        return
+    end
+
     local   backgroundTexture = _G[frame:GetName().."Background"];
     local   color = nil;
-    
-    if (unit.exists) then
-        if (unit.npc == false and unit.reaction == TGUF_REACTION_FRIENDLY) then
-            -- Friendly PC's don't get a con background
-            color = frame.backgroundColor;
-        else
-            -- Enemy PC's and NPC's get a con background
-            local   levelDiff = unit.level - UnitLevel("player");
-    
-            if (levelDiff >= 5) then
-                color = frame.impossibleColor;
-            elseif (levelDiff >= 3) then
-                color = frame.veryDifficultColor;
-            elseif (levelDiff >= 2) then
-                color = frame.difficultColor;
-            elseif (-levelDiff <= GetQuestGreenRange()) then
-                color = frame.standardColor;
-            else
-                color = frame.trivialColor;
-            end
-            if (color == nil) then
-                color = frame.backgroundColor;
-            end
-        end
-    else
+
+    if (unit.npc == false and unit.reaction == TGUF_REACTION_FRIENDLY) then
+        -- Friendly PCs don't get a con background
         color = frame.backgroundColor;
+    else
+        -- Enemy PCs and NPCs get a con background
+        local levelDiff = unit.level - UnitLevel("player");
+
+        if (levelDiff >= 5) then
+            color = frame.impossibleColor;
+        elseif (levelDiff >= 3) then
+            color = frame.veryDifficultColor;
+        elseif (levelDiff >= 2) then
+            color = frame.difficultColor;
+        elseif (levelDiff >= -GetQuestGreenRange()) then
+            color = frame.standardColor;
+        else
+            color = frame.trivialColor;
+        end
+        if (color == nil) then
+            color = frame.backgroundColor;
+        end
     end
-    backgroundTexture:SetColorTexture(color.r,color.g,color.b,color.a);
+    backgroundTexture:SetColorTexture(color.r,color.g,color.b,color.a)
 end
 
 local TGUnitModelTemplate_ObjectInfo =
