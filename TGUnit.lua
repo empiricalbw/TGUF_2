@@ -1364,7 +1364,7 @@ function TGUnitComponent_OnUnitModelChange(event,unit)
 end
 
 function TGUFUnitDebug(msg)
-    TGUFDebug(msg)
+    --TGUFDebug(msg)
 end
 
 -- Register the TGUnit component
