@@ -34,3 +34,5 @@ TGUnitFramesLayoutManager.xml
 TGUnitFramesDebugging.lua
 TGUnitCastTracker.xml
 TGRaidSorter.lua
+
+#TGUnitMouseover.xml
