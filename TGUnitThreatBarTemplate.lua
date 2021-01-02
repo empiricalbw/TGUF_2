@@ -177,11 +177,13 @@ function TGUnitThreatBar_ThreatUnitUpdate(unit,frame)
         elseif (threat.status == 0) then
             barTexture:SetVertexColor(frame.lowThreatColor.r,frame.lowThreatColor.g,frame.lowThreatColor.b,frame.lowThreatColor.a);
         else
+            --[[
             if (threat.status == 2) then
                 print("Threat status was 2 (tanking insecurely) but isTanking was "..tostring(threat.isTanking));
             elseif (threat.status == 3) then
                 print("Threat status was 3 (tanking securely) but isTanking was "..tostring(threat.isTanking));
             end
+            ]]
             barTexture:SetVertexColor(frame.mediumThreatColor.r,frame.mediumThreatColor.g,frame.mediumThreatColor.b,frame.mediumThreatColor.a);
         end
         if (frame.showSpark) then

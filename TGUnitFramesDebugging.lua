@@ -479,7 +479,7 @@ local TGUF_DEBUG_TARGET_LAYOUT =
             unit = "target",
             hideInRaid = false,
             anchors = {
-                {myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=550,dY=-520}}
+                {myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=925,dY=-780}}
         },
         {   -- Targettarget
             --type = "TGUnitDebug",
