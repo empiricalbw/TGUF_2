@@ -1,8 +1,8 @@
 ## Interface: 50200
-## Title: TGUnitFrames 1.0a1
+## Title: TGUnitFrames
 ## DefaultState: enabled
 ## Notes: BC-compatible unit frames!
-## Version 1.0a1
+## Version: 1.0
 ## Author: Holytoledo
 ## URL: 
 ## SavedVariables: TGUF_TEMPLATES_USER_TEMPLATES, TGUF_USER_COLLECTIONS, TGMD_MODELS
