@@ -2,7 +2,7 @@
     <Script file="TGUnitTextureTemplate.lua"/>
     
     <!-- This frame is a generic unit element -->
-    <Frame name="TGUnitTextureTemplate" virtual="true">
+    <Frame name="TGUnitTextureTemplate" virtual="true" inherits="BackdropTemplate">
         <Layers>
             <Layer level="BACKGROUND">
                 <Texture name="$parentBackground" setAllPoints="true"/>

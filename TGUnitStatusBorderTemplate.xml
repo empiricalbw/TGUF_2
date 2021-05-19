@@ -2,5 +2,5 @@
     <Script file="TGUnitStatusBorderTemplate.lua"/>
     
     <!-- This frame is a generic unit element -->
-    <Frame name="TGUnitStatusBorderTemplate" virtual="true"/>
+    <Frame name="TGUnitStatusBorderTemplate" virtual="true" inherits="BackdropTemplate"/>
 </Ui>
