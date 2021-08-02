@@ -88,7 +88,7 @@ function TGUF_UpdateComboPoints(unit,exists,existsChanged)
     if (exists) then
         local newComboPoints;
         if (unit.isPlayerTarget) then
-            newComboPoints = GetComboPoints("player");
+            newComboPoints = GetComboPoints("player", "target");
         else
             newComboPoints = 0;
         end
