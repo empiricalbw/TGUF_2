@@ -518,7 +518,7 @@ local TGUF_DEBUG_FOCUS_LAYOUT =
                        unit = "focus",
                        hideInRaid = false,
                        anchors = {
-                               {myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=550,dY=-620}}
+                               {myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=1175,dY=-850}}
                },
                {       -- Focustarget
                        --type = "TGUnitDebug",
@@ -529,6 +529,7 @@ local TGUF_DEBUG_FOCUS_LAYOUT =
                        anchors = {
                                {myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
                },
+               --[[
                {       -- Focustargettarget
                        --type = "TGUnitDebug",
                        collection = "DUF",
@@ -538,6 +539,7 @@ local TGUF_DEBUG_FOCUS_LAYOUT =
                        anchors = {
                                {myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
                }
+               ]]
        }
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_FOCUS_LAYOUT,"TGUnitDebugFocusLayout");

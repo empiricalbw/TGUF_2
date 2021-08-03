@@ -180,7 +180,7 @@ local TGUF_AUTO_UNITS = {
     "player",
     "pet",
     "target",
-    "focus",
+    --"focus",
     "mouseover",
 
     "party1", "party2", "party3", "party4",
