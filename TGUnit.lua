@@ -180,7 +180,7 @@ local TGUF_AUTO_UNITS = {
     "player",
     "pet",
     "target",
-    --"focus",
+    "focus",
     "mouseover",
 
     "party1", "party2", "party3", "party4",
@@ -1266,8 +1266,8 @@ end
 
 function TGUnitComponent_OnPlayerFocusChange(event)
     TGUFUnitDebug(event);
-    for k,_ in pairs(TGUF_FOCUS_CHANGED_LIST) do
-        TGUnitComponent_UpdateUnit(k,TGUF_ALLFLAGS);
+    for k,v in pairs(TGUF_FOCUS_CHANGED_LIST) do
+        TGUnitComponent_UpdateUnit(k,v.allFlags);
     end
 end
 

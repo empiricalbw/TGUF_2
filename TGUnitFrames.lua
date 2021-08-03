@@ -15,6 +15,7 @@ local TGUF_EVENT_DISPATCH_TABLE =
     ["UNIT_MAXHEALTH"]                = "onUnitMaxHealthChange",
     ["UNIT_LEVEL"]                    = "onUnitLevelChange",
     ["PLAYER_TARGET_CHANGED"]         = "onPlayerTargetChange",
+    ["PLAYER_FOCUS_CHANGED"]          = "onPlayerFocusChange",
     ["UNIT_SPELLCAST_START"]          = "onSpellcastStart",
     ["UNIT_SPELLCAST_DELAYED"]        = "onSpellcastDelayed",
     ["UNIT_SPELLCAST_STOP"]           = "onSpellcastStop",
