@@ -503,6 +503,45 @@ local TGUF_DEBUG_TARGET_LAYOUT =
 }
 TGUnitFrames_RegisterLayout(TGUF_DEBUG_TARGET_LAYOUT,"TGUnitDebugTargetLayout");
 
+local TGUF_DEBUG_FOCUS_LAYOUT =
+{
+       filters =
+       {
+               "focus"
+       },
+       frames =
+       {
+               {       -- Focus
+                       --type = "TGUnitDebug",
+                       collection = "DUF",
+                       type = "DUF_Generic",
+                       unit = "focus",
+                       hideInRaid = false,
+                       anchors = {
+                               {myPoint="TOPLEFT",anchor=0,anchorPoint="TOPLEFT",dX=550,dY=-620}}
+               },
+               {       -- Focustarget
+                       --type = "TGUnitDebug",
+                       collection = "DUF",
+                       type = "DUF_Generic",
+                       unit = "focustarget",
+                       hideInRaid = false,
+                       anchors = {
+                               {myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
+               },
+               {       -- Focustargettarget
+                       --type = "TGUnitDebug",
+                       collection = "DUF",
+                       type = "DUF_Generic",
+                       unit = "focustargettarget",
+                       hideInRaid = false,
+                       anchors = {
+                               {myPoint="LEFT",anchor=-1,anchorPoint="RIGHT",dX=7,dY=0}}
+               }
+       }
+}
+TGUnitFrames_RegisterLayout(TGUF_DEBUG_FOCUS_LAYOUT,"TGUnitDebugFocusLayout");
+
 function TGUnitDebug_AllocateFocusFrames()
     TGUF_DEBUG_FRAME_TEMPLATE.highlightIfTargetted = true;
     local   f1 = TGUnitFrames_AllocateUnitFrameTemplate("focus","TGUnitDebug",UIParent,{{myPoint="LEFT",anchorPoint="LEFT",dX=0,dY=0}},{UIParent});
@@ -546,6 +585,7 @@ function TGUnitFramesDebuggingComponent_OnPlayerEnteringWorld()
 
         TGUnitFrames_AllocateLayout("TGUnitDebugPartyLayout");
         TGUnitFrames_AllocateLayout("TGUnitDebugTargetLayout");
+        TGUnitFrames_AllocateLayout("TGUnitDebugFocusLayout");
 
         local raidFrames = TGUnitFrames_AllocateLayout("TGUnitDebugRaidLayout");
         TGRaidSorter_SetRaidFrames(raidFrames);
