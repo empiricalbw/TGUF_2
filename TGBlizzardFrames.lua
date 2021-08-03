@@ -23,6 +23,9 @@ function TGUF_FilterDefaultFrame(selector)
     elseif (selector == "target") then
         TGUF_FILTER_LIST["target"] = true;
         TGUF_HideBlizzardTargetFrame();
+    elseif (selector == "focus") then
+        TGUF_FILTER_LIST["focus"] = true;
+        TGUF_HideBlizzardFocusFrame();
     elseif (selector == "raid") then
         TGUF_FILTER_LIST["raid"] = true;
         TGUF_HideBlizzardRaidFrames();
@@ -100,4 +103,15 @@ function TGUF_HideBlizzardTargetFrame()
     TargetFrame:UnregisterAllEvents();
     TargetFrame:Hide();
     ComboFrame:UnregisterAllEvents();
+end
+
+-- Focus frame
+local focusFrameHidden = false;
+function TGUF_HideBlizzardFocusFrame()
+    if (focusFrameHidden == true) then
+        return;
+    end
+    focusFrameHidden = true;
+    FocusFrame:UnregisterAllEvents();
+    FocusFrame:Hide();
 end

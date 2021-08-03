@@ -1,7 +1,7 @@
 --[[
-    This is a list of all the unit IDs that we are keeping track of.  The unit
-    ID ("target","player","raid12",etc...) is used as the key into the table
-    and the value is the unit information for that unit.
+    This is a list of all the unit ID's that we are keeping track of.  The unit
+    ID ("target","player","focus","raid12",etc...) is used as the key into the
+    table and the value is the unit information for that unit.
 ]]
 local TGUF_UNIT_LIST = {}
 
@@ -18,6 +18,12 @@ TGUF_CAST_LIST = {}
     player's target changes.  These units are all of the form "target*".
 ]]
 local TGUF_TARGET_CHANGED_LIST = {}
+
+--[[
+    This is a list of all the unit ID's that need to be updated when the
+    player's focus changes.  These units are all of the form "focus*".
+]]
+local TGUF_FOCUS_CHANGED_LIST = {};
 
 --[[
     This is a list of the different types of power that a unit can have as well
@@ -119,7 +125,7 @@ end
     generates events notifying us of a change for all of the non-player unit
     IDs which the game generates events for:
 
-        target, pet, mouseover, partX, raidX
+        target, focus, pet, mouseover, partX, raidX
 ]]
 local TGUF_NONPLAYEREVENT_MASK = bit.bor(
                                 TGUF_ISPLAYERTARGET,
@@ -174,6 +180,7 @@ local TGUF_AUTO_UNITS = {
     "player",
     "pet",
     "target",
+    "focus",
     "mouseover",
 
     "party1", "party2", "party3", "party4",
@@ -588,6 +595,9 @@ function TGUnitComponent_NewUnit(unit)
     TGUF_UNIT_LIST[unit] = theUnit
     if (string.find(unit,"^target")) then
         TGUF_TARGET_CHANGED_LIST[unit] = theUnit
+    end
+    if (string.find(unit,"^focus")) then
+        TGUF_FOCUS_CHANGED_LIST[unit] = theUnit;
     end
     theUnit.debuffCounts = {Magic=0,Curse=0,Disease=0,Poison=0}
     
@@ -1254,6 +1264,13 @@ function TGUnitComponent_OnPlayerTargetChange(event)
     TGUnitComponent_UpdateSpecialUnitsPeriodic()
 end
 
+function TGUnitComponent_OnPlayerFocusChange(event)
+    TGUFUnitDebug(event);
+    for k,_ in pairs(TGUF_FOCUS_CHANGED_LIST) do
+        TGUnitComponent_UpdateUnit(k,TGUF_ALLFLAGS);
+    end
+end
+
 local unitPetMap = { 
     ["player"] = "pet",
     ["party1"] = "partypet1",
@@ -1377,6 +1394,7 @@ local TGUnitComponent = {
     ["onUnitMaxHealthChange"] = TGUnitComponent_OnUnitMaxHealthChange,
     ["onUnitLevelChange"]     = TGUnitComponent_OnUnitLevelChange,
     ["onPlayerTargetChange"]  = TGUnitComponent_OnPlayerTargetChange,
+    ["onPlayerFocusChange"]   = TGUnitComponent_OnPlayerFocusChange,
     ["onUnitPet"]             = TGUnitComponent_OnUnitPet,
     ["onGroupJoined"]         = TGUnitComponent_OnGroupRosterUpdate,
     ["onGroupRosterUpdate"]   = TGUnitComponent_OnGroupRosterUpdate,
